@@ -19,7 +19,6 @@ body, html {
 }
 
 .k-currency {
-    width: 300px;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
@@ -28,7 +27,7 @@ body, html {
 }
 
 .k-currency-amount {
-    font-size: 6em;
+    font-size: 8em;
     margin: 0px;
     padding: 0px;
 }
