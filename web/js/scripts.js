@@ -9,7 +9,7 @@ var setHeight = function () {
     var $currency = $('.k-currency');
     var windowHeight = $(window).height();
     $layout.height(windowHeight);
-    $currency.css('padding-top', ((windowHeight - $currency.height()) / 2) + 'px');
+    $currency.css('margin-top', ((windowHeight - $currency.height()) / 2) + 'px');
 }
 
 
