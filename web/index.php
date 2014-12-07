@@ -12,7 +12,7 @@
 <div class="k-layout">
     <div class="k-currency">
         <p class="k-currency-amount">74,87 руб.</p>
-        <p class="k-currency-description">07.12.2014, Магазин "ДИКСИ", Спб</p>
+        <p class="k-currency-description"><?=date('d.m.Y')?>, Магазин "ДИКСИ", Спб</p>
         <script type="text/javascript" src="http://yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki" data-yashareTheme="counter"></div>
     </div>
 </div>
