@@ -19,9 +19,9 @@ body, html {
 }
 
 .k-currency {
-    display: table-cell;
-    vertical-align: middle;
+    width: 400px;
     text-align: center;
+    margin: 0 auto;
     color: #222;
     text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
 }
@@ -36,4 +36,9 @@ body, html {
     font-size: 2em;
     margin: 0px;
     padding: 0px;
+}
+
+.k-social {
+    width: 400px;
+    margin: 0 auto;
 }

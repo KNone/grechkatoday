@@ -1,12 +1,15 @@
 $(document).ready(function () {
-    setHeight();
     $(window).on('resize', function () {
         setHeight();
-    })
+    });
+    setHeight();
 });
 var setHeight = function () {
     var $layout = $('.k-layout');
-    $layout.height($(window).height());
+    var $currency = $('.k-currency');
+    var windowHeight = $(window).height();
+    $layout.height(windowHeight);
+    $currency.css('margin-top', ((windowHeight - $currency.height()) / 2) + 'px');
 }
 
 
