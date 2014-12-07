@@ -22,7 +22,7 @@ body, html {
     text-align: center;
     margin: 0 auto;
     color: #222;
-    text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+    text-shadow: 1px 1px 1px rgba(250, 250, 250, 0.7);
 }
 
 .k-currency-amount {
