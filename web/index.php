@@ -1,32 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Гречка Тудэй | Сколько стоит гречка сегодня?</title>
-    <link rel="stylesheet" href="css/styles.css" type="text/css"/>
-    <meta name="keywords" content="гречка, греча, курс гречи, килограмм гречки, гречневая крупа, стоимость гречки" />
-    <meta name="description" content="Сколько стои гречка сегодня на прилавках российских магазинов" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-</head>
-<body>
-<div class="k-layout">
-    <div class="k-currency">
-        <p class="k-currency-amount">74,87 руб.</p>
-        <p class="k-currency-description"><?=date('d.m.Y')?>, Магазин "ДИКСИ", Спб</p>
-        <script type="text/javascript" src="http://yastatic.net/share/share.js" charset="utf-8"></script><div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki" data-yashareTheme="counter"></div>
-    </div>
-</div>
-<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/scripts.js"></script>
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<?php
 
-    ga('create', 'UA-57431312-1', 'auto');
-    ga('send', 'pageview');
+require_once __DIR__ . '/../vendor/autoload.php';
 
-</script>
-</body>
-</html>
+$config = require_once __DIR__ . '/../app/config.php';
+
+use KNone\Entity\PriceRepository;
+use KNone\View\TemplateEngine;
+
+$app = new Silex\Application();
+
+$app->register(new Silex\Provider\DoctrineServiceProvider(), [
+    'dbs.options' => [
+        'mysql' => $config['mysql'],
+    ],
+]);
+$app['template.engine'] = new TemplateEngine();
+$app['price.repository'] = new PriceRepository($app['dbs']['mysql']);
+
+$app->get('/', function () use ($app) {
+    $price = $app['price.repository']->findLastPrice();
+    if (!$price) {
+        die('It\'s so bad, but site is down :-(');
+    }
+
+    return $app['template.engine']->render(
+        'index',
+        ['price' => $price]
+    );
+});
+
+$app->run();
