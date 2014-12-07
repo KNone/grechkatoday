@@ -1,0 +1,40 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=cyrillic,cyrillic-ext,latin);
+
+body, html {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 14px;
+    vertical-align: baseline;
+    background-color: transparent;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.k-layout {
+    background: transparent url('../images/background.jpg') no-repeat 50% 50%;
+    width: 100%;
+    min-height: 500px;
+    display: table;
+}
+
+.k-currency {
+    width: 300px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #222;
+    text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+}
+
+.k-currency-amount {
+    font-size: 6em;
+    margin: 0px;
+    padding: 0px;
+}
+
+.k-currency-description {
+    font-size: 2em;
+    margin: 0px;
+    padding: 0px;
+}
