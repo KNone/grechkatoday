@@ -14,8 +14,7 @@ body, html {
 .k-layout {
     background: transparent url('../images/background.jpg') no-repeat 50% 50%;
     width: 100%;
-    min-height: 500px;
-    display: table;
+    background-size: cover;
 }
 
 .k-currency {
