@@ -26,7 +26,7 @@ class PriceRepository
     public function findLastPrice()
     {
         $date = new \DateTime('today');
-        $sql = 'SELECT * FROM k_prices p WHERE p.date <= ? LIMIT 1';
+        $sql = 'SELECT * FROM k_prices p WHERE p.date <= ? ORDER BY p.date DESC LIMIT 1';
 
         /** @var Statement $statement */
         $statement = $this->connection->prepare($sql);
