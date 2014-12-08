@@ -19,7 +19,7 @@ body, html {
 }
 
 .k-currency {
-    width: 400px;
+    width: 540px;
     text-align: center;
     margin: 0 auto;
     color: #111;
@@ -29,17 +29,18 @@ body, html {
     border-radius: 15px 15px 15px 15px;
     -moz-border-radius: 15px 15px 15px 15px;
     -webkit-border-radius: 15px 15px 15px 15px;
-    border: 0px solid #000000;
+    border: 0 solid #000000;
 }
 
 .k-currency-amount {
-    font-size: 8em;
+    font-size: 150px;
+    letter-spacing: -5px;
     margin: 0px;
     padding: 0px;
 }
 
 .k-currency-description {
-    font-size: 2em;
-    margin: 0px;
-    padding: 0px;
+    font-size: 35px;
+    margin: 0;
+    padding: 0;
 }
