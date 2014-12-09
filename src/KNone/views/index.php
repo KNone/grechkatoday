@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Гречка Тудэй | Сколько стоит гречка сегодня?</title>
+    <title>Гречка Тудэй | Сколько стоит гречка сегодня? #grechkatoday #гречкатудэй</title>
     <link rel="stylesheet" href="css/styles.css" type="text/css"/>
     <meta name="keywords" content="гречка, греча, курс гречи, килограмм гречки, гречневая крупа, стоимость гречки, grechkatoday, grechka, гручка тудэй, гречка сегодня" />
     <meta name="description" content="Сколько стоит гречка сегодня на прилавках российских магазинов" />
