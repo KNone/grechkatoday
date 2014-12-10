@@ -35,4 +35,36 @@ class RateExchange
         $this->usd = $usd;
         $this->eur = $eur;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return $this->dateTime;
+    }
+
+    /**
+     * @return float
+     */
+    public function getEur()
+    {
+        return $this->eur;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return float
+     */
+    public function getUsd()
+    {
+        return $this->usd;
+    }
 }
