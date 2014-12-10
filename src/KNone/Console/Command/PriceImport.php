@@ -18,5 +18,6 @@ class PriceImport extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         $output->writeln('Import process started');
+        //$this->getSilexApplication()
     }
 }
