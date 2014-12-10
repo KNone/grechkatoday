@@ -7,16 +7,17 @@ $config = require_once __DIR__ . '/config.php';
 use KNone\Grecha\Entity\PriceRepository;
 use KNone\Grecha\View\TemplateEngine;
 use Knp\Provider\ConsoleServiceProvider;
+use Silex\Provider\DoctrineServiceProvider;
 
 $app = new Silex\Application();
+
 $app['debug'] = isset($config['app']['debug']) && $config['app']['debug'] === true;
-$app->register(new Silex\Provider\DoctrineServiceProvider(), [
+
+$app->register(new DoctrineServiceProvider(), [
     'dbs.options' => [
         'mysql' => $config['mysql'],
     ],
 ]);
-$app['template.engine'] = new TemplateEngine();
-$app['price.repository'] = new PriceRepository($app['dbs']['mysql']);
 $app->register(
     new ConsoleServiceProvider(),
     [
@@ -25,6 +26,14 @@ $app->register(
         'console.project_directory' => __DIR__ . '/..',
     ]
 );
+
+$app['template.engine'] = $app->share(function () {
+    return new TemplateEngine();
+});
+$app['price.repository'] = $app->share(function () use ($app) {
+    return new PriceRepository($app['dbs']['mysql']);
+});
+
 
 $app->get('/', function () use ($app) {
     $price = $app['price.repository']->findLastPrice();
