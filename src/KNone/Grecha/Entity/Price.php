@@ -2,6 +2,9 @@
 
 namespace KNone\Grecha\Entity;
 
+/**
+ * @deprecated
+ */
 class Price
 {
     /**
@@ -25,14 +28,12 @@ class Price
     private $description;
 
     /**
-     * @param int $id
      * @param float $price
      * @param \DateTime $date
      * @param string $description
      */
-    public function __construct($id, $price, \DateTime $date, $description)
+    public function __construct($price, \DateTime $date, $description)
     {
-        $this->id = $id;
         $this->price = $price;
         $this->date = $date;
         $this->description = $description;

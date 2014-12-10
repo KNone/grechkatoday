@@ -5,6 +5,9 @@ namespace KNone\Grecha\Entity;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Statement;
 
+/**
+ * @deprecated
+ */
 class PriceRepository
 {
     /**
@@ -50,6 +53,13 @@ class PriceRepository
         $values = $values[0];
         $date = \DateTime::createFromFormat('Y-m-d H:i:s', $values['date']);
 
-        return new Price($values['id'], $values['price'], $date, $values['description']);
+        $price = new Price($values['price'], $date, $values['description']);
+
+        $reflection = new \ReflectionObject($price);
+        $idProperty = $reflection->getProperty('id');
+        $idProperty->setAccessible(true);
+        $idProperty->setValue($price, $values['id']);
+
+        return $price;
     }
 }
