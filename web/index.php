@@ -9,6 +9,7 @@ use KNone\View\TemplateEngine;
 
 $app = new Silex\Application();
 
+$app['debug'] = isset($config['app']['debug']) && $config['app']['debug'] === true;
 $app->register(new Silex\Provider\DoctrineServiceProvider(), [
     'dbs.options' => [
         'mysql' => $config['mysql'],
