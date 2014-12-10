@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+
+$app = require_once __DIR__ . '/bootstrap.php';
+
+use KNone\Console\Command\PriceImport;
+
+$application = $app['console'];
+$application->add(new PriceImport());
+
+$application->run();
