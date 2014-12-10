@@ -3,7 +3,7 @@
 
 $app = require_once __DIR__ . '/bootstrap.php';
 
-use KNone\Grecha\Console\Command\PriceImport;
+use KNone\Grecha\Command\PriceImport;
 
 $application = $app['console'];
 $application->add(new PriceImport());
