@@ -11,7 +11,7 @@ use Doctrine\DBAL\Statement;
 class PriceRepository
 {
     /**
-     * @var \Doctrine\DBAL\Driver\Connection
+     * @var \Doctrine\DBAL\Connection
      */
     private $connection;
 
