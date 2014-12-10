@@ -1,6 +1,6 @@
 <?php
 
-namespace KNone\Entity;
+namespace KNone\Grecha\Entity;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Statement;

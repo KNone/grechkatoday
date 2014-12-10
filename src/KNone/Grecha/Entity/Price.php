@@ -1,6 +1,6 @@
 <?php
 
-namespace KNone\Entity;
+namespace KNone\Grecha\Entity;
 
 class Price
 {
@@ -25,10 +25,10 @@ class Price
     private $description;
 
     /**
-     * @param $id
-     * @param $price
+     * @param int $id
+     * @param float $price
      * @param \DateTime $date
-     * @param $description
+     * @param string $description
      */
     public function __construct($id, $price, \DateTime $date, $description)
     {

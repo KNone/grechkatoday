@@ -4,12 +4,11 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $config = require_once __DIR__ . '/config.php';
 
-use KNone\Entity\PriceRepository;
-use KNone\View\TemplateEngine;
+use KNone\Grecha\Entity\PriceRepository;
+use KNone\Grecha\View\TemplateEngine;
 use Knp\Provider\ConsoleServiceProvider;
 
 $app = new Silex\Application();
-
 $app['debug'] = isset($config['app']['debug']) && $config['app']['debug'] === true;
 $app->register(new Silex\Provider\DoctrineServiceProvider(), [
     'dbs.options' => [
