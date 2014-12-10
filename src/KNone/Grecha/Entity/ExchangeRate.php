@@ -2,7 +2,7 @@
 
 namespace KNone\Grecha\Entity;
 
-class RateExchange
+class ExchangeRate
 {
     /**
      * @var int

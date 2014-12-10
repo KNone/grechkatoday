@@ -1,8 +1,8 @@
 <?php
 
-namespace KNone\Grecha\RateParser;
+namespace KNone\Grecha\ExchangeRate;
 
-use KNone\Grecha\Entity\RateExchange;
+use KNone\Grecha\Entity\ExchangeRate;
 
 class XmlRateParser
 {
@@ -13,7 +13,7 @@ class XmlRateParser
 
     /**
      * @param \DateTime $dateTime
-     * @return RateExchange
+     * @return ExchangeRate
      */
     public function getExchangeRateByDate(\DateTime $dateTime)
     {
@@ -31,7 +31,7 @@ class XmlRateParser
             }
         }
 
-        return new RateExchange($dateTime, $usd, $eur);
+        return new ExchangeRate($dateTime, $usd, $eur);
     }
 
     /**
