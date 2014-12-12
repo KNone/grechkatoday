@@ -2,9 +2,6 @@
 
 namespace KNone\Grecha\Entity;
 
-/**
- * @deprecated
- */
 class Price
 {
     /**
@@ -15,44 +12,29 @@ class Price
     /**
      * @var float
      */
-    private $price;
+    private $value;
 
     /**
      * @var \DateTime
      */
-    private $date;
+    private $dateTime;
 
     /**
-     * @var string
+     * @param float $value
+     * @param \DateTime $dateTime
      */
-    private $description;
-
-    /**
-     * @param float $price
-     * @param \DateTime $date
-     * @param string $description
-     */
-    public function __construct($price, \DateTime $date, $description)
+    public function __construct($value, \DateTime $dateTime)
     {
-        $this->price = $price;
-        $this->date = $date;
-        $this->description = $description;
+        $this->dateTime = $dateTime;
+        $this->value = $value;
     }
 
     /**
      * @return \DateTime
      */
-    public function getDate()
+    public function getDateTime()
     {
-        return $this->date;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
+        return $this->dateTime;
     }
 
     /**
@@ -66,8 +48,8 @@ class Price
     /**
      * @return float
      */
-    public function getPrice()
+    public function getValue()
     {
-        return $this->price;
+        return $this->value;
     }
 }

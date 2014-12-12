@@ -2,64 +2,37 @@
 
 namespace KNone\Grecha\Entity;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Statement;
+use Doctrine\DBAL\Types\Type;
+use KNone\Grecha\Entity\Common\AbstractRepository;
+use KNone\Grecha\Entity\Common\FieldDescription;
 
-/**
- * @deprecated
- */
-class PriceRepository
+class PriceRepository extends AbstractRepository
 {
-    /**
-     * @var \Doctrine\DBAL\Driver\Connection
-     */
-    private $connection;
+    const TABLE_NAME = 'k_prices';
 
-    /**
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection)
+
+    public function getActualPrice()
     {
-        $this->connection = $connection;
+        // todo
     }
 
     /**
-     * @return Price
+     * @return string
      */
-    public function findLastPrice()
+    protected function getTableName()
     {
-        $date = new \DateTime('today');
-        $sql = 'SELECT * FROM k_prices p WHERE p.date <= ? ORDER BY p.date DESC LIMIT 1';
-
-        /** @var Statement $statement */
-        $statement = $this->connection->prepare($sql);
-        $statement->bindValue(1, $date, 'datetime');
-        $statement->execute();
-        $result = $statement->fetchAll();
-
-        if (empty($result)) {
-            return null;
-        }
-
-        return $this->createPriceObject($result);
+        return self::TABLE_NAME;
     }
 
     /**
-     * @param array $values
-     * @return Price
+     * @return array|Common\FieldDescription[]
      */
-    private function createPriceObject(array $values)
+    protected function getFieldDescriptions()
     {
-        $values = $values[0];
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $values['date']);
-
-        $price = new Price($values['price'], $date, $values['description']);
-
-        $reflection = new \ReflectionObject($price);
-        $idProperty = $reflection->getProperty('id');
-        $idProperty->setAccessible(true);
-        $idProperty->setValue($price, $values['id']);
-
-        return $price;
+        return [
+            new FieldDescription('id', 'id', Type::INTEGER),
+            new FieldDescription('dateTime', 'date_time', Type::DATETIME),
+            new FieldDescription('value', 'value', Type::FLOAT),
+        ];
     }
 }

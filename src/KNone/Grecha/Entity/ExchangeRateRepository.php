@@ -2,43 +2,40 @@
 
 namespace KNone\Grecha\Entity;
 
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Types\Type;
+use KNone\Grecha\Entity\Common\AbstractRepository;
+use KNone\Grecha\Entity\Common\FieldDescription;
 
-class ExchangeRateRepository
+class ExchangeRateRepository extends AbstractRepository
 {
-    private $objectsForPersist = [];
-
-    /**
-     * @var \Doctrine\DBAL\Connection
-     */
-    private $connection;
-
-    /**
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
-    }
+    const TABLE_NAME = 'k_exchange_rate';
 
     /**
      * @return ExchangeRate
      */
-    public function getLastExchangeRate()
+    public function getExchangeRate()
     {
         // todo
     }
 
     /**
-     * @param ExchangeRate $exchangeRate
+     * @return FieldDescription[]
      */
-    public function add(ExchangeRate $exchangeRate)
+    protected function getFieldDescriptions()
     {
-        $this->objectsForPersist[] = $exchangeRate;
+        return [
+            new FieldDescription('id', 'id', Type::INTEGER),
+            new FieldDescription('dateTime', 'date_time', Type::DATETIME),
+            new FieldDescription('usd', 'usd', Type::FLOAT),
+            new FieldDescription('eur', 'eur', Type::FLOAT),
+        ];
     }
 
-    public function commit()
+    /**
+     * @return string
+     */
+    protected function getTableName()
     {
-        // todo: persist objects
+        return self::TABLE_NAME;
     }
 }
