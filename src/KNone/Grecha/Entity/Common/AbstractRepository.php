@@ -6,7 +6,6 @@ use Doctrine\DBAL\Connection;
 
 abstract class AbstractRepository
 {
-
     /**
      * @var array
      */
@@ -18,11 +17,17 @@ abstract class AbstractRepository
     protected $connection;
 
     /**
+     * @var FieldDescription[]
+     */
+    protected $fieldDescriptions;
+
+    /**
      * @param Connection $connection
      */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
+        $this->fieldDescriptions = $this->getFieldDescriptions();
     }
 
     /**
@@ -38,8 +43,7 @@ abstract class AbstractRepository
         foreach ($this->objectsForPersist as $object) {
             $data = [];
             $types = [];
-            $fieldDescriptions = $this->getFieldDescriptions();
-            foreach ($fieldDescriptions as $key => $description) {
+            foreach ($this->fieldDescriptions as $key => $description) {
                 $method = 'get' . ucfirst($description->getPropertyName());
                 $data[$description->getFieldName()] = $object->$method();
                 $types[] = $description->getType();
@@ -57,4 +61,19 @@ abstract class AbstractRepository
      * @return string
      */
     abstract protected function getTableName();
+
+    protected function createObjectFromAssocArray($result, $className)
+    {
+        $reflection = new \ReflectionClass($className);
+        $object = $reflection->newInstanceWithoutConstructor();
+
+        foreach ($this->fieldDescriptions as $description) {
+            $property = $reflection->getProperty($description->getPropertyName());
+            $property->setAccessible(true);
+            $property->setValue($object, $result[$description->getFieldName()]);
+            $property->setAccessible(false);
+        }
+
+        return $object;
+    }
 }
