@@ -10,7 +10,6 @@ class PriceRepository extends AbstractRepository
 {
     const TABLE_NAME = 'k_prices';
 
-
     public function getActualPrice()
     {
         // todo
