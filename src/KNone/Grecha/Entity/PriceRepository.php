@@ -41,7 +41,7 @@ class PriceRepository extends AbstractRepository
     /**
      * @return string
      */
-    protected function getEntityName()
+    protected function getEntityClassName()
     {
         return 'KNone\Grecha\Entity\Price';
     }

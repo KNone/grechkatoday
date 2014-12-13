@@ -55,7 +55,7 @@ class ExchangeRateRepository extends AbstractRepository
     /**
      * @return string
      */
-    protected function getEntityName()
+    protected function getEntityClassName()
     {
         return 'KNone\Grecha\Entity\ExchangeRate';
     }
