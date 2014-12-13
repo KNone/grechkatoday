@@ -2,38 +2,26 @@
 
 namespace KNone\Grecha\Entity;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Statement;
+use Doctrine\DBAL\Types\Type;
+use KNone\Grecha\Entity\Common\AbstractRepository;
+use KNone\Grecha\Entity\Common\FieldDescription;
 
-/**
- * @deprecated
- */
-class PriceRepository
+class PriceRepository extends AbstractRepository
 {
-    /**
-     * @var \Doctrine\DBAL\Connection
-     */
-    private $connection;
+    const TABLE_NAME = 'k_prices';
 
     /**
-     * @param Connection $connection
+     * @return null
      */
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
-    }
-
-    /**
-     * @return Price
-     */
-    public function findLastPrice()
+    public function getActualPrice()
     {
         $date = new \DateTime('today');
-        $sql = 'SELECT * FROM k_prices p WHERE p.date <= ? ORDER BY p.date DESC LIMIT 1';
+        $sql = 'SELECT * FROM ' . $this->getTableName() . ' p WHERE p.date_time <= ? ORDER BY p.date_time DESC LIMIT 1';
 
         /** @var Statement $statement */
         $statement = $this->connection->prepare($sql);
-        $statement->bindValue(1, $date, 'datetime');
+        $statement->bindValue(1, $date, TYPE::DATETIME);
         $statement->execute();
         $result = $statement->fetchAll();
 
@@ -41,25 +29,26 @@ class PriceRepository
             return null;
         }
 
-        return $this->createPriceObject($result);
+        return $this->createObjectFromAssocArray($result[0], 'KNone\Grecha\Entity\Price');
     }
 
     /**
-     * @param array $values
-     * @return Price
+     * @return string
      */
-    private function createPriceObject(array $values)
+    protected function getTableName()
     {
-        $values = $values[0];
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $values['date']);
+        return self::TABLE_NAME;
+    }
 
-        $price = new Price($values['price'], $date, $values['description']);
-
-        $reflection = new \ReflectionObject($price);
-        $idProperty = $reflection->getProperty('id');
-        $idProperty->setAccessible(true);
-        $idProperty->setValue($price, $values['id']);
-
-        return $price;
+    /**
+     * @return array|Common\FieldDescription[]
+     */
+    protected function getFieldDescriptions()
+    {
+        return [
+            new FieldDescription('id', 'id', Type::INTEGER),
+            new FieldDescription('dateTime', 'date_time', Type::DATETIME),
+            new FieldDescription('value', 'value', Type::FLOAT),
+        ];
     }
 }

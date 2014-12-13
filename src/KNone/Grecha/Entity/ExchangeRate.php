@@ -2,7 +2,7 @@
 
 namespace KNone\Grecha\Entity;
 
-class Price
+class ExchangeRate
 {
     /**
      * @var int
@@ -10,23 +10,30 @@ class Price
     private $id;
 
     /**
-     * @var float
-     */
-    private $value;
-
-    /**
      * @var \DateTime
      */
     private $dateTime;
 
     /**
-     * @param float $value
-     * @param \DateTime $dateTime
+     * @var float
      */
-    public function __construct($value, \DateTime $dateTime)
+    private $usd;
+
+    /**
+     * @var float
+     */
+    private $eur;
+
+    /**
+     * @param \DateTime $dateTime
+     * @param float $usd
+     * @param float $eur
+     */
+    function __construct(\DateTime $dateTime, $usd, $eur)
     {
         $this->dateTime = $dateTime;
-        $this->value = $value;
+        $this->usd = $usd;
+        $this->eur = $eur;
     }
 
     /**
@@ -35,6 +42,14 @@ class Price
     public function getDateTime()
     {
         return $this->dateTime;
+    }
+
+    /**
+     * @return float
+     */
+    public function getEur()
+    {
+        return $this->eur;
     }
 
     /**
@@ -48,8 +63,8 @@ class Price
     /**
      * @return float
      */
-    public function getValue()
+    public function getUsd()
     {
-        return $this->value;
+        return $this->usd;
     }
 }
