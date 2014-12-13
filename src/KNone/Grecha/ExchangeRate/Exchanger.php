@@ -7,7 +7,7 @@ use KNone\Grecha\Entity\ExchangeRate;
 class Exchanger
 {
     /**
-     * @var \KNone\Grecha\Entity\ExchangeRate
+     * @var ExchangeRate
      */
     private $exchangeRate;
 
