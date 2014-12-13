@@ -17,11 +17,11 @@ class GrechaServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['template.engine'] = $app->share(function () {
+        $app['grecha.template.engine'] = $app->share(function () {
             return new TemplateEngine();
         });
-        
-        $app['price.repository'] = $app->share(function () use ($app) {
+
+        $app['grecha.price.repository'] = $app->share(function () use ($app) {
             return new PriceRepository($app['dbs']['mysql']);
         });
 
