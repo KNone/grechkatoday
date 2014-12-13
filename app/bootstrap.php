@@ -28,7 +28,7 @@ $app->register(
 $app->register(new GrechaServiceProvider());
 
 $app->get('/', function () use ($app) {
-    $price = $app['price.repository']->findLastPrice();
+    $price = $app['price.repository']->findActualPrice();
     if (!$price) {
         die('It\'s so bad, but site is down :-(');
     }

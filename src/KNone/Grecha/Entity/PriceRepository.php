@@ -12,32 +12,16 @@ class PriceRepository extends AbstractRepository
     const TABLE_NAME = 'k_prices';
 
     /**
-     * @return null
-     */
-    public function getActualPrice()
-    {
-        $date = new \DateTime('today');
-        $sql = 'SELECT * FROM ' . $this->getTableName() . ' p WHERE p.date_time <= ? ORDER BY p.date_time DESC LIMIT 1';
-
-        /** @var Statement $statement */
-        $statement = $this->connection->prepare($sql);
-        $statement->bindValue(1, $date, TYPE::DATETIME);
-        $statement->execute();
-        $result = $statement->fetchAll();
-
-        if (empty($result)) {
-            return null;
-        }
-
-        return $this->createObjectFromAssocArray($result[0], 'KNone\Grecha\Entity\Price');
-    }
-
-    /**
      * @return string
      */
     protected function getTableName()
     {
         return self::TABLE_NAME;
+    }
+
+    protected function getEntityName()
+    {
+        return 'KNone\Grecha\Entity\Price';
     }
 
     /**
@@ -50,5 +34,45 @@ class PriceRepository extends AbstractRepository
             new FieldDescription('dateTime', 'date_time', Type::DATETIME),
             new FieldDescription('value', 'value', Type::FLOAT),
         ];
+    }
+
+    /**
+     * @deprecated
+     * @return null
+     */
+    public function getActualPrice()
+    {
+        $date = new \DateTime('today');
+        $sql = 'SELECT * FROM ' . $this->getTableName() . ' p WHERE p.date_time <= ? ORDER BY p.date_time DESC LIMIT 1';
+
+        /** @var Statement $statement */
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $date, Type::DATETIME);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        if (empty($result)) {
+            return null;
+        }
+
+        return $this->createEntity($result[0]);
+    }
+
+    /**
+     * @return Price|null
+     */
+    public function findActualPrice()
+    {
+        $sql = sprintf('SELECT * FROM %s p ORDER BY p.date_time DESC LIMIT 1', $this->getTableName());
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        if (empty($result)) {
+            return null;
+        }
+
+        return $this->createEntity($result[0]);
     }
 }
