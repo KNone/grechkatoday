@@ -2,8 +2,9 @@
 
 namespace KNone\Grecha;
 
-use KNone\Grecha\Entity\ExchangeRateRepository;
-use KNone\Grecha\Entity\PriceRepository;
+use KNone\Grecha\Entity\Persistence\DbalExchangeRateRepository;
+use KNone\Grecha\Entity\Persistence\DbalPriceRepository;
+use KNone\Grecha\ExchangeRate\ExchangerFactory;
 use KNone\Grecha\ExchangeRate\Importer;
 use KNone\Grecha\ExchangeRate\XmlRateParser;
 use KNone\Grecha\View\TemplateEngine;
@@ -19,12 +20,12 @@ class GrechaServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['template.engine'] = $app->share(function () {
+        $app['grecha.template.engine'] = $app->share(function () {
             return new TemplateEngine();
         });
-        
-        $app['price.repository'] = $app->share(function () use ($app) {
-            return new PriceRepository($app['dbs']['mysql']);
+
+        $app['grecha.price.repository'] = $app->share(function () use ($app) {
+            return new DbalPriceRepository($app['dbs']['mysql']);
         });
 
         $app['price.importer'] = function () use ($app) {
@@ -33,11 +34,17 @@ class GrechaServiceProvider implements ServiceProviderInterface
         };
 
         $app['grecha.exchange_rate.repository'] = $app->share(function () use ($app) {
-            return new ExchangeRateRepository($app['dbs']['mysql']);
+            return new DbalExchangeRateRepository($app['dbs']['mysql']);
         });
 
         $app['grecha.exchange_rate.importer'] = $app->share(function () use ($app) {
             return new Importer(new XmlRateParser(), $app['grecha.exchange_rate.repository']);
+        });
+
+        $app['grecha.exchanger_rate'] = $app->share(function () use ($app) {
+            $exchangerFactory = new ExchangerFactory($app['grecha.exchange_rate.repository']);
+
+            return $exchangerFactory->createActualExchangerRate();
         });
     }
 

@@ -28,12 +28,12 @@ $app->register(
 $app->register(new GrechaServiceProvider());
 
 $app->get('/', function () use ($app) {
-    $price = $app['price.repository']->findActualPrice();
+    $price = $app['grecha.price.repository']->findActualPrice();
     if (!$price) {
         die('It\'s so bad, but site is down :-(');
     }
 
-    return $app['template.engine']->render(
+    return $app['grecha.template.engine']->render(
         'index',
         ['price' => $price]
     );

@@ -66,7 +66,7 @@ abstract class AbstractRepository
     /**
      * @return string
      */
-    abstract protected function getEntityName();
+    abstract protected function getEntityClassName();
 
     /**
      * @param  array  $result
@@ -97,7 +97,7 @@ abstract class AbstractRepository
      */
     protected function createEntity(array $result)
     {
-        return $this->createObjectFromAssocArray($result, $this->getEntityName());
+        return $this->createObjectFromAssocArray($result, $this->getEntityClassName());
     }
 
     /**
