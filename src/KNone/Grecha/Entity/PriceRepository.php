@@ -10,38 +10,12 @@ use KNone\Grecha\Entity\Common\FieldDescription;
 class PriceRepository extends AbstractRepository
 {
     /**
-     * @return string
+     * @return Price|null
      */
-    protected function getTableName()
-    {
-        return 'k_prices';
-    }
-
-    protected function getEntityName()
-    {
-        return 'KNone\Grecha\Entity\Price';
-    }
-
-    /**
-     * @return array|Common\FieldDescription[]
-     */
-    protected function getFieldDescriptions()
-    {
-        return [
-            new FieldDescription('id', 'id', Type::INTEGER),
-            new FieldDescription('dateTime', 'date_time', Type::DATETIME),
-            new FieldDescription('value', 'value', Type::FLOAT),
-        ];
-    }
-
-    /**
-     * @deprecated
-     * @return null
-     */
-    public function getActualPrice()
+    public function findActualPrice()
     {
         $date = new \DateTime('today');
-        $sql = 'SELECT * FROM ' . $this->getTableName() . ' p WHERE p.date_time <= ? ORDER BY p.date_time DESC LIMIT 1';
+        $sql = sprintf('SELECT * FROM %s p WHERE p.date_time <= ? ORDER BY p.date_time DESC LIMIT 1', $this->getTableName());
 
         /** @var Statement $statement */
         $statement = $this->connection->prepare($sql);
@@ -57,20 +31,30 @@ class PriceRepository extends AbstractRepository
     }
 
     /**
-     * @return Price|null
+     * @return string
      */
-    public function findActualPrice()
+    protected function getTableName()
     {
-        $sql = sprintf('SELECT * FROM %s p ORDER BY p.date_time DESC LIMIT 1', $this->getTableName());
+        return 'k_prices';
+    }
 
-        $statement = $this->connection->prepare($sql);
-        $statement->execute();
-        $result = $statement->fetchAll();
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'KNone\Grecha\Entity\Price';
+    }
 
-        if (empty($result)) {
-            return null;
-        }
-
-        return $this->createEntity($result[0]);
+    /**
+     * @return FieldDescription[]
+     */
+    protected function getFieldDescriptions()
+    {
+        return [
+            new FieldDescription('id', 'id', Type::INTEGER),
+            new FieldDescription('dateTime', 'date_time', Type::DATETIME),
+            new FieldDescription('value', 'value', Type::FLOAT),
+        ];
     }
 }

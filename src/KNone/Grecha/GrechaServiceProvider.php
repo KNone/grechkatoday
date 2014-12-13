@@ -2,7 +2,10 @@
 
 namespace KNone\Grecha;
 
+use KNone\Grecha\Entity\ExchangeRateRepository;
 use KNone\Grecha\Entity\PriceRepository;
+use KNone\Grecha\ExchangeRate\Importer;
+use KNone\Grecha\ExchangeRate\XmlRateParser;
 use KNone\Grecha\View\TemplateEngine;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -19,13 +22,23 @@ class GrechaServiceProvider implements ServiceProviderInterface
         $app['template.engine'] = $app->share(function () {
             return new TemplateEngine();
         });
+        
         $app['price.repository'] = $app->share(function () use ($app) {
             return new PriceRepository($app['dbs']['mysql']);
         });
+
         $app['price.importer'] = function () use ($app) {
             $parser = new PricePareser();
             return new PriceImporter($app['price.repository'], $parser);
         };
+
+        $app['grecha.exchange_rate.repository'] = $app->share(function () use ($app) {
+            return new ExchangeRateRepository($app['dbs']['mysql']);
+        });
+
+        $app['grecha.exchange_rate.importer'] = $app->share(function () use ($app) {
+            return new Importer(new XmlRateParser(), $app['grecha.exchange_rate.repository']);
+        });
     }
 
     /**

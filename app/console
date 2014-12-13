@@ -3,9 +3,11 @@
 
 $app = require_once __DIR__ . '/bootstrap.php';
 
+use KNone\Grecha\Command\ExchangeRateImport;
 use KNone\Grecha\Command\PriceImport;
 
 $application = $app['console'];
 $application->add(new PriceImport());
+$application->add(new ExchangeRateImport());
 
 $application->run();

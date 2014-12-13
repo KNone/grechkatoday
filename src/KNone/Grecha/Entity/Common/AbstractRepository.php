@@ -44,7 +44,7 @@ abstract class AbstractRepository
         foreach ($this->objectsForPersist as $object) {
             $data = [];
             $types = [];
-            foreach ($this->fieldDescriptions as $key => $description) {
+            foreach ($this->fieldDescriptions as $description) {
                 $method = 'get' . ucfirst($description->getPropertyName());
                 $data[$description->getFieldName()] = $object->$method();
                 $types[] = $description->getType();
