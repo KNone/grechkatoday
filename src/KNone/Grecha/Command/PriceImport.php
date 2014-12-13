@@ -24,7 +24,10 @@ class PriceImport extends Command
     {
         $output->writeln('Import process started');
 
-        //$this->getSilexApplication()
+        $importer = $this->getSilexApplication()['price.importer'];
+        $result = $importer->importPrice();
+
+        $output->writeln('Import process finished');
 
         return 0;
     }

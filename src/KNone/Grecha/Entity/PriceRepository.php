@@ -9,14 +9,12 @@ use KNone\Grecha\Entity\Common\FieldDescription;
 
 class PriceRepository extends AbstractRepository
 {
-    const TABLE_NAME = 'k_prices';
-
     /**
      * @return string
      */
     protected function getTableName()
     {
-        return self::TABLE_NAME;
+        return 'k_prices';
     }
 
     protected function getEntityName()
