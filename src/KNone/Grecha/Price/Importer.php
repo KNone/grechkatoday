@@ -14,7 +14,7 @@ class Importer implements ImporterInterface
     protected $priceRepository;
 
     /**
-     * @var Pareser
+     * @var Parser
      */
     protected $parser;
 

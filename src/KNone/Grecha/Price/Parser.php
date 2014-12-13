@@ -5,7 +5,7 @@ namespace KNone\Grecha\Price;
 use KNone\Grecha\Price\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
-class Pareser implements ParserInterface
+class Parser implements ParserInterface
 {
     /**
      * Create new instance

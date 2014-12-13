@@ -10,7 +10,7 @@ use KNone\Grecha\View\TemplateEngine;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use KNone\Grecha\Price\Importer as PriceImporter;
-use KNone\Grecha\Price\Pareser as PricePareser;
+use KNone\Grecha\Price\Parser as PriceParser;
 
 class GrechaServiceProvider implements ServiceProviderInterface
 {
@@ -28,7 +28,7 @@ class GrechaServiceProvider implements ServiceProviderInterface
         });
 
         $app['price.importer'] = function () use ($app) {
-            $parser = new PricePareser();
+            $parser = new PriceParser();
             return new PriceImporter($app['price.repository'], $parser);
         };
 
