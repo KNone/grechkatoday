@@ -13,7 +13,7 @@ class ExchangeRateRepository extends AbstractRepository
     /**
      * @return ExchangeRate
      */
-    public function findExchangeRate()
+    public function findActualExchangeRate()
     {
         $date = new \DateTime('today');
         $sql = sprintf('SELECT * FROM %s p WHERE p.date_time <= ? ORDER BY p.date_time DESC LIMIT 1', $this->getTableName());

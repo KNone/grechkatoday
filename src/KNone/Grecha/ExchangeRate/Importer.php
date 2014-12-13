@@ -29,7 +29,7 @@ class Importer
     public function import()
     {
         $dateTime = new \DateTime('today');
-        $actualExchangeRate = $this->exchangeRateRepository->findExchangeRate();
+        $actualExchangeRate = $this->exchangeRateRepository->findActualExchangeRate();
 
         if (!$actualExchangeRate || $actualExchangeRate->getDateTime() != $dateTime) {
             $exchangeRate = $this->xmlRateParser->getExchangeRateByDate($dateTime);
