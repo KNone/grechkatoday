@@ -13,9 +13,22 @@ class ExchangeRateRepository extends AbstractRepository
     /**
      * @return ExchangeRate
      */
-    public function getExchangeRate()
+    public function findExchangeRate()
     {
-        // todo
+        $date = new \DateTime('today');
+        $sql = sprintf('SELECT * FROM %s p WHERE p.date_time <= ? ORDER BY p.date_time DESC LIMIT 1', $this->getTableName());
+
+        /** @var Statement $statement */
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $date, Type::DATETIME);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        if (empty($result)) {
+            return null;
+        }
+
+        return $this->createEntity($result[0]);
     }
 
     /**
@@ -37,5 +50,13 @@ class ExchangeRateRepository extends AbstractRepository
     protected function getTableName()
     {
         return self::TABLE_NAME;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEntityName()
+    {
+        return 'KNone\Grecha\Entity\ExchangeRate';
     }
 }
