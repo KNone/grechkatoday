@@ -40,6 +40,16 @@ body, html {
 }
 
 .k-currency-description {
+    display: inline-block;
+    width: 210px;
+    font-size: 35px;
+    margin: 0;
+    padding: 0;
+}
+
+.k-currency-any {
+    display: inline-block;
+    width: 210px;
     font-size: 35px;
     margin: 0;
     padding: 0;

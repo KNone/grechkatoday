@@ -16,6 +16,7 @@
 <div class="k-layout">
     <div class="k-currency">
         <p class="k-currency-amount"><?=$price->getValue()?> руб.</p>
+        <p class="k-currency-any"><?=$exchanger->exchangeToUsd($price->getValue())?>$ <?=$exchanger->exchangeToEur($price->getValue())?>€</p>
         <p class="k-currency-description"><?=$price->getDateTime()->format('d.m.Y')?></p>
         <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki" data-yashareTheme="counter"></div>
     </div>
