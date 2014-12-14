@@ -9,10 +9,9 @@ class Parser implements ParserInterface
     /**
      * {@inheritdoc}
      */
-    public function getByDate(\DateTime $date)
+    public function getByDate(\DateTimeInterface $date)
     {
         $url = $this->buildUrl($date);
-        var_dump($url);
         $html = $this->getHtml($url);
         $selector = $this->getSelector();
 
@@ -77,10 +76,10 @@ class Parser implements ParserInterface
     }
 
     /**
-     * @param  \DateTime $date
+     * @param  \DateTimeInterface $date
      * @return string
      */
-    protected function buildUrl(\DateTime $date)
+    protected function buildUrl(\DateTimeInterface $date)
     {
         $params = $this->getUrlQueryParam();
         $params['date'] = $date->format($this->getDateFormat());
