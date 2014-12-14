@@ -67,9 +67,11 @@ class Importer implements ImporterInterface
      */
     private function savePrice($value, \DateTimeInterface $dateTime)
     {
-        $price = new Price($value, $dateTime);
-        $this->getPriceRepository()->add($price);
-        $this->getPriceRepository()->commit();
+        if ($value) {
+            $price = new Price($value, $dateTime);
+            $this->getPriceRepository()->add($price);
+            $this->getPriceRepository()->commit();
+        }
     }
 
     /**
