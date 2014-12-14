@@ -20,8 +20,8 @@
 
         <p class="k-currency-date"><?= $price->getDateTime()->format('d.m.Y') ?></p>
 
-        <p class="k-currency-any"><?= $exchanger->exchangeToUsd($price->getValue()) ?>
-            $ <?= $exchanger->exchangeToEur($price->getValue()) ?>€</p>
+        <p class="k-currency-any"><?= $exchanger->exchangeToUsd($price->getValue()) ?>$
+            <?= $exchanger->exchangeToEur($price->getValue()) ?>€</p>
     </div>
     <div class="yashare-auto-init k_social" data-yashareL10n="ru" data-yashareType="small"
          data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"
