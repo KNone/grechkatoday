@@ -1,5 +1,8 @@
 <?php
 return [
+    'app' => [
+        'debug' => true,
+    ],
     'mysql' => [
         'driver' => 'pdo_mysql',
         'host' => '127.0.0.1',

@@ -2,64 +2,23 @@
 
 namespace KNone\Grecha\Entity;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Statement;
-
-/**
- * @deprecated
- */
-class PriceRepository
+interface PriceRepository
 {
     /**
-     * @var \Doctrine\DBAL\Connection
+     * @return Price|null
      */
-    private $connection;
+    public function findActualPrice();
 
     /**
-     * @param Connection $connection
+     * @param \DateTimeInterface $dateTime
+     * @return Price|null
      */
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
-    }
+    public function findPriceByDateTime(\DateTimeInterface $dateTime);
 
     /**
-     * @return Price
+     * @param Price $price
      */
-    public function findLastPrice()
-    {
-        $date = new \DateTime('today');
-        $sql = 'SELECT * FROM k_prices p WHERE p.date <= ? ORDER BY p.date DESC LIMIT 1';
+    public function add($price);
 
-        /** @var Statement $statement */
-        $statement = $this->connection->prepare($sql);
-        $statement->bindValue(1, $date, 'datetime');
-        $statement->execute();
-        $result = $statement->fetchAll();
-
-        if (empty($result)) {
-            return null;
-        }
-
-        return $this->createPriceObject($result);
-    }
-
-    /**
-     * @param array $values
-     * @return Price
-     */
-    private function createPriceObject(array $values)
-    {
-        $values = $values[0];
-        $date = \DateTime::createFromFormat('Y-m-d H:i:s', $values['date']);
-
-        $price = new Price($values['price'], $date, $values['description']);
-
-        $reflection = new \ReflectionObject($price);
-        $idProperty = $reflection->getProperty('id');
-        $idProperty->setAccessible(true);
-        $idProperty->setValue($price, $values['id']);
-
-        return $price;
-    }
+    public function commit();
 }

@@ -28,14 +28,18 @@ $app->register(
 $app->register(new GrechaServiceProvider());
 
 $app->get('/', function () use ($app) {
-    $price = $app['price.repository']->findLastPrice();
+    $price = $app['grecha.price.repository']->findActualPrice();
+    $exchanger = $app['grecha.exchanger_rate'];
     if (!$price) {
         die('It\'s so bad, but site is down :-(');
     }
 
-    return $app['template.engine']->render(
+    return $app['grecha.template.engine']->render(
         'index',
-        ['price' => $price]
+        [
+            'price' => $price,
+            'exchanger' => $exchanger
+        ]
     );
 });
 

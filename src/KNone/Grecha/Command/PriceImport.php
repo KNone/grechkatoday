@@ -3,6 +3,7 @@
 namespace KNone\Grecha\Command;
 
 use Knp\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -12,7 +13,8 @@ class PriceImport extends Command
     {
         $this
             ->setName('app:import:price')
-            ->setDescription('Import price for grecha pf external sources');
+            ->setDescription('Import price for grecha pf external sources')
+            ->addArgument('date', InputArgument::OPTIONAL, null); //Y-m-d
     }
 
     /**
@@ -23,8 +25,15 @@ class PriceImport extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Import process started');
+        $date = $input->getArgument('date');
+        $importer = $this->getSilexApplication()['grecha.price.importer'];
+        if (empty($date)) {
+            $importer->importPrice();
+        } else {
+            $importer->importPriceFromDateToToday(\DateTime::createFromFormat('Y-m-d H:i:s', $date . ' 00:00:00'));
+        }
+        $output->writeln('Import process finished');
 
-        //$this->getSilexApplication()
 
         return 0;
     }
