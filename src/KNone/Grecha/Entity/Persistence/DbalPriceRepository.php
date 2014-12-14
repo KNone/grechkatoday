@@ -33,10 +33,10 @@ class DbalPriceRepository extends AbstractRepository implements PriceRepository
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      * @return Price|null
      */
-    public function findPriceByDateTime(\DateTime $dateTime)
+    public function findPriceByDateTime(\DateTimeInterface $dateTime)
     {
         $sql = sprintf('SELECT * FROM %s p WHERE p.date_time = ? LIMIT 1', $this->getTableName());
 

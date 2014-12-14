@@ -10,10 +10,10 @@ interface PriceRepository
     public function findActualPrice();
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      * @return Price|null
      */
-    public function findPriceByDateTime(\DateTime $dateTime);
+    public function findPriceByDateTime(\DateTimeInterface $dateTime);
 
     /**
      * @param Price $price
