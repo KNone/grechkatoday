@@ -2,65 +2,37 @@
 
 namespace KNone\Grecha\Price;
 
-use KNone\Grecha\Price\ParserInterface;
-use KNone\Grecha\Price\ImporterInterface;
-use KNone\Grecha\Price\Strategy\PriceStrategyInterface as StrategyInterface;
+use KNone\Grecha\Entity\Price;
+use KNone\Grecha\Entity\PriceRepository;
+use KNone\Grecha\Price\Strategy\PriceStrategyInterface;
 
 class Importer implements ImporterInterface
 {
     /**
-     * @var 
+     * @var PriceRepository
      */
-    protected $priceRepository;
+    private $priceRepository;
 
     /**
      * @var Parser
      */
-    protected $parser;
-
-    protected $strategy;
+    private $parser;
 
     /**
-     * Create new instance
-     *
-     * @param object          $priceRepository
-     * @param ParserInterface $parser
+     * @var PriceStrategyInterface
      */
-    public function __construct($priceRepository, ParserInterface $parser/*, StrategyInterface $priceStrategy*/)
+    private $priceStrategy;
+
+    /**
+     * @param object $priceRepository
+     * @param ParserInterface $parser
+     * @param PriceStrategyInterface $priceStrategy
+     */
+    public function __construct($priceRepository, ParserInterface $parser, PriceStrategyInterface $priceStrategy)
     {
         $this->priceRepository = $priceRepository;
         $this->parser = $parser;
-        $this->strategy = $priceStrategy;
-    }
-
-    /**
-     * @return object
-     */
-    protected function getPriceRepository()
-    {
-        return $this->priceRepository;
-    }
-
-    /**
-     * @return Pareser
-     */
-    protected function getParser()
-    {
-        return $this->parser;
-    }
-
-    protected function getPriceStrategy()
-    {
-        return $this->priceStrategy;
-    }
-
-    /**
-     * @param  array  $priceList
-     * @return int
-     */
-    protected function calculatePrice(array $priceList)
-    {
-        return $this->getPriceStrategy()->calculate($priceList);
+        $this->priceStrategy = $priceStrategy;
     }
 
     /**
@@ -68,25 +40,67 @@ class Importer implements ImporterInterface
      */
     public function importPrice()
     {
-        $yesterday = date('d-m-Y', strtotime('-1 days'));
-        $price = $this->getParser()->getByDate(new \DateTime($yesterday));
-        $price = $this->calculatePrice($price);
-        //save in storage
+        $priceValue = $this->getPriceValueByDate(new \DateTime('yesterday'));
+        $this->savePrice($priceValue, new \DateTime('today'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function importPriceByDate(\DateTime $date)
+    public function importPriceFromDateToToday(\DateTimeInterface $date)
     {
-
+        $currentDate = new \DateTimeImmutable('yesterday');
+        while ($currentDate >= $date) {
+            $nextDay = $currentDate->add(new \DateInterval('P1D'));
+            $price = $this->getPriceRepository()->findPriceByDateTime($nextDay);
+            if (!$price) {
+                $priceValue = $this->getPriceValueByDate($currentDate);
+                $this->savePrice($priceValue, $nextDay);
+            }
+            $currentDate = $currentDate->sub(new \DateInterval('P1D'));
+        }
     }
 
     /**
-     * {@inheritdoc}
+     * @param float $value
+     * @param \DateTimeInterface $dateTime
      */
-    public function importPriceByDateInterval(\DateInterval $interval)
+    private function savePrice($value, \DateTimeInterface $dateTime)
     {
+        $price = new Price($value, $dateTime);
+        $this->getPriceRepository()->add($price);
+        $this->getPriceRepository()->commit();
+    }
 
+    /**
+     * @param \DateTimeInterface $dateTime
+     * @return float|null
+     */
+    private function getPriceValueByDate(\DateTimeInterface $dateTime)
+    {
+        $prices = $this->getParser()->getByDate($dateTime);
+
+        return $this->getPriceStrategy()->calculate($prices);
+    }
+
+    /**
+     * @return PriceRepository
+     */
+    private function getPriceRepository()
+    {
+        return $this->priceRepository;
+    }
+
+    /**
+     * @return Parser
+     */
+    private function getParser()
+    {
+        return $this->parser;
+    }
+
+    private function getPriceStrategy()
+    {
+        return $this->priceStrategy;
     }
 }
