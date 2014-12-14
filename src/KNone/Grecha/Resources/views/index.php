@@ -1,3 +1,7 @@
+<?php
+/** @var $price \KNone\Grecha\Entity\Price */
+/** @var $exchanger \KNone\Grecha\ExchangeRate\Exchanger */
+?>
 <!DOCTYPE html>
 <html>
 <head>

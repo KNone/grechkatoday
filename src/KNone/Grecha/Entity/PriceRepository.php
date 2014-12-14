@@ -10,9 +10,15 @@ interface PriceRepository
     public function findActualPrice();
 
     /**
-     * @param Price $exchangeRate
+     * @param \DateTimeInterface $dateTime
+     * @return Price|null
      */
-    public function add($exchangeRate);
+    public function findPriceByDateTime(\DateTimeInterface $dateTime);
+
+    /**
+     * @param Price $price
+     */
+    public function add($price);
 
     public function commit();
 }

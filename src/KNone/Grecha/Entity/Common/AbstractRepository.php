@@ -41,7 +41,7 @@ abstract class AbstractRepository
 
     public function commit()
     {
-        foreach ($this->objectsForPersist as $object) {
+        foreach ($this->objectsForPersist as $key => $object) {
             $data = [];
             $types = [];
             foreach ($this->fieldDescriptions as $description) {
@@ -50,6 +50,7 @@ abstract class AbstractRepository
                 $types[] = $description->getType();
             }
             $this->connection->insert($this->getTableName(), $data, $types);
+            unset($this->objectsForPersist[$key]);
         }
     }
 

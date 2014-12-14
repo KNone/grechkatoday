@@ -10,7 +10,7 @@ class ExchangeRate
     private $id;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $dateTime;
 
@@ -25,11 +25,11 @@ class ExchangeRate
     private $eur;
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      * @param float $usd
      * @param float $eur
      */
-    function __construct(\DateTime $dateTime, $usd, $eur)
+    function __construct(\DateTimeInterface $dateTime, $usd, $eur)
     {
         $this->dateTime = $dateTime;
         $this->usd = $usd;
@@ -37,7 +37,7 @@ class ExchangeRate
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getDateTime()
     {
