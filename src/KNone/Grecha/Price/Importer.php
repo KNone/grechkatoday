@@ -41,7 +41,11 @@ class Importer implements ImporterInterface
     public function importPrice()
     {
         $priceValue = $this->getPriceValueByDate(new \DateTime('yesterday'));
-        $this->savePrice($priceValue, new \DateTime('today'));
+        $today = new \DateTime('today');
+        $price = $this->getPriceRepository()->findPriceByDateTime($today);
+        if (!$price) {
+            $this->savePrice($priceValue, $today);
+        }
     }
 
     /**
