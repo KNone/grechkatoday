@@ -3,6 +3,7 @@
     $(document).ready(function () {
         var $window = $(window);
         var $currency = $('.k-currency');
+        $currency.css('opacity', 0);
         $window.on('resize', function () {
             var __this = $(this);
             setHeight(__this);
