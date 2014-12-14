@@ -2,16 +2,61 @@
 
 namespace KNone\Grecha\Price;
 
-use KNone\Grecha\Price\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 class Parser implements ParserInterface
 {
     /**
-     * Create new instance
+     * {@inheritdoc}
      */
-    public function __construct()
+    public function getByDate(\DateTime $date)
     {
+        $url = $this->buildUrl($date);
+        var_dump($url);
+        $html = $this->getHtml($url);
+        $selector = $this->getSelector();
+
+        $crawler = $this->getCrawler($html)
+            ->filter($selector)
+            ->reduce(function (Crawler $node, $i) {
+                static $skipStep = false;
+                //skip trash data
+                if ($i < 3) return false;
+
+                if (!$skipStep) {
+                    //Skip ads
+                    if ($node->attr('id') !== null) {
+                        return false;
+                    }
+                    //end day
+                    if ($node->attr('valign') !== null) {
+
+                        $value = $node->filter('td > b')->text();
+
+                        if (empty($value)) {
+                            return false; //skip
+                        } else {
+                            $skipStep = true;
+
+                            return false; //end day data block
+                        }
+                    }
+
+                    $value = $node->filter('td[bgcolor="#f8f0e8"]')->text();
+
+                    if ($this->checkValue($value)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+
+        $prices = $crawler->each(function (Crawler $node, $i) {
+            return $node->filter('td[bgcolor="#f8f0e8"]')->text();
+        });
+
+        return $prices;
     }
 
     /**
@@ -40,7 +85,7 @@ class Parser implements ParserInterface
         $params = $this->getUrlQueryParam();
         $params['date'] = $date->format($this->getDateFormat());
 
-        return $this->getUrl().'?'.http_build_query($params);
+        return $this->getUrl() . '?' . http_build_query($params);
     }
 
     /**
@@ -75,8 +120,6 @@ class Parser implements ParserInterface
     /**
      * @param  string $url
      * @return string
-     *
-     * @todo maybe use curl
      */
     protected function getHtml($url)
     {
@@ -90,56 +133,5 @@ class Parser implements ParserInterface
     protected function checkValue($value)
     {
         return !empty($value) && $value > 10 && $value < 200;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getByDate(\DateTime $date)
-    {
-        $url = $this->buildUrl($date);var_dump($url);
-        $html = $this->getHtml($url);
-        $selector = $this->getSelector();
-
-        $crawler = $this->getCrawler($html)
-                        ->filter($selector)
-                        ->reduce(function (Crawler $node, $i) {
-                            static $skipStep = false;
-                            //skip trash data
-                            if ($i < 3) return false;
-
-                            if (!$skipStep) {
-                                //Skip ads
-                                if ($node->attr('id') !== null) {
-                                    return false;
-                                }  
-                                //end day
-                                if ($node->attr('valign') !== null) {
-
-                                    $value = $node->filter('td > b')->text();
-                                    
-                                    if (empty($value)) {
-                                        return false; //skip
-                                    } else {
-                                        $skipStep = true;
-                                        return false; //end day data block
-                                    }
-                                }
-
-                                $value = $node->filter('td[bgcolor="#f8f0e8"]')->text();
-
-                                if ($this->checkValue($value)) {
-                                    return true;
-                                }
-                            }
-
-                            return false;
-                        });
-
-        $price = $crawler->each(function (Crawler $node, $i) {
-            return $node->filter('td[bgcolor="#f8f0e8"]')->text();
-        });
-
-        return $price;
     }
 }
