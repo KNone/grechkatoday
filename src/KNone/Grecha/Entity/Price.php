@@ -15,22 +15,22 @@ class Price
     private $value;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $dateTime;
 
     /**
      * @param float $value
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      */
-    public function __construct($value, \DateTime $dateTime)
+    public function __construct($value, \DateTimeInterface $dateTime)
     {
         $this->dateTime = $dateTime;
         $this->value = $value;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getDateTime()
     {

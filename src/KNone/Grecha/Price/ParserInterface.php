@@ -5,8 +5,8 @@ namespace KNone\Grecha\Price;
 interface ParserInterface
 {
     /**
-     * @param  \DateTime $date
+     * @param  \DateTimeInterface $date
      * @return array
      */
-	public function getByDate(\DateTime $date);
+	public function getByDate(\DateTimeInterface $date);
 }
