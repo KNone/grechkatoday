@@ -10,9 +10,9 @@ interface PriceRepository
     public function findActualPrice();
 
     /**
-     * @param Price $exchangeRate
+     * @param Price $price
      */
-    public function add($exchangeRate);
+    public function add($price);
 
     public function commit();
 }
