@@ -33,7 +33,7 @@ body, html {
     padding: 0;
 }
 
-.k-currency-description {
+.k-currency-date {
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 15px 15px 15px 15px;
     -moz-border-radius: 15px 15px 15px 15px;
@@ -61,4 +61,29 @@ body, html {
 
 .yashare-auto-init {
     margin-top: 5px;
+}
+
+.k-contact {
+    display: block;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+a.k-contact-link {
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 19px;
+    text-shadow: 0 5px 25px rgba(250, 250, 250, 0.6);
+}
+
+a.k-contact-link:hover {
+    text-decoration: none;
+}
+
+.k_social {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 15px;
 }

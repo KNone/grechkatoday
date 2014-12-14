@@ -18,14 +18,16 @@
     <div class="k-currency">
         <p class="k-currency-amount"><?= $price->getValue() ?> руб.</p>
 
-        <p class="k-currency-description"><?= $price->getDateTime()->format('d.m.Y') ?></p>
+        <p class="k-currency-date"><?= $price->getDateTime()->format('d.m.Y') ?></p>
 
         <p class="k-currency-any"><?= $exchanger->exchangeToUsd($price->getValue()) ?>
             $ <?= $exchanger->exchangeToEur($price->getValue()) ?>€</p>
-
-        <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small"
-             data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki" data-yashareTheme="counter"></div>
     </div>
+    <div class="yashare-auto-init k_social" data-yashareL10n="ru" data-yashareType="small"
+         data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"
+         data-yashareTheme="counter"></div>
+    <div class="k-contact"><a class="k-contact-link" href="mailto:grechka@knone.ru"
+                              title="По всем вопросам пишите письма">grechka@knone.ru</a></div>
 </div>
 <script>
     (function (i, s, o, g, r, a, m) {
