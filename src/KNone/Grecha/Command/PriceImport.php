@@ -24,9 +24,8 @@ class PriceImport extends Command
     {
         $output->writeln('Import process started');
 
-        $importer = $this->getSilexApplication()['price.importer'];
-        $result = $importer->importPrice();
-
+        $importer = $this->getSilexApplication()['grecha.price.importer'];
+        $importer->importPrice();
         $output->writeln('Import process finished');
 
         return 0;
