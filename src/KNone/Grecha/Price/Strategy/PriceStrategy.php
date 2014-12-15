@@ -7,7 +7,7 @@ class PriceStrategy implements PriceStrategyInterface
     const AVERAGE = 60;
     const DEVIATION = 0.6;
 
-    const RETAIL_RATE = 0.5;
+    const RETAIL_RATE = 0.52;
 
     /**
      * @param array $priceList
