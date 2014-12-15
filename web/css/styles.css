@@ -81,9 +81,13 @@ a.k-contact-link:hover {
     text-decoration: none;
 }
 
-.k_social {
+.k-social {
     width: 100%;
     text-align: center;
     position: absolute;
     bottom: 15px;
+}
+
+.k-offer {
+    opacity: 0.6;
 }

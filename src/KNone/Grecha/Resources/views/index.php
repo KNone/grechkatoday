@@ -17,14 +17,24 @@
 <body>
 <div class="k-layout">
     <div class="k-currency">
+
         <p class="k-currency-amount"><?= $price->getValue() ?> <i class="fa fa-rub"></i></p>
 
+        <div class="k-offer">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:468px;height:15px"
+                 data-ad-client="ca-pub-1797214625818644"
+                 data-ad-slot="3393579185"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
         <p class="k-currency-date"><?= $price->getDateTime()->format('d.m.Y') ?></p>
 
         <p class="k-currency-any"><?= $exchanger->exchangeToUsd($price->getValue()) ?>$
             <?= $exchanger->exchangeToEur($price->getValue()) ?>€</p>
     </div>
-    <div class="yashare-auto-init k_social" data-yashareL10n="ru" data-yashareType="small"
+    <div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="small"
          data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"
          data-yashareTheme="counter"></div>
     <div class="k-contact"><a class="k-contact-link" href="mailto:grechka@knone.ru"
@@ -47,9 +57,9 @@
     ga('require', 'displayfeatures');
     ga('send', 'pageview');
 </script>
-
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/scripts.js"></script>
 <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </body>
 </html>
