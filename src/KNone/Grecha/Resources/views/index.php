@@ -7,16 +7,17 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Гречка Тудэй | Сколько стоит гречка сегодня? #grechkatoday #гречкатудэй</title>
-    <link rel="stylesheet" href="css/styles.css" type="text/css"/>
     <meta name="keywords"
           content="гречка, греча, курс гречи, килограмм гречки, гречневая крупа, стоимость гречки, grechkatoday, grechka, гручка тудэй, гречка сегодня"/>
     <meta name="description" content="Сколько стоит гречка сегодня на прилавках российских магазинов"/>
+    <link rel="stylesheet" href="css/styles.css" type="text/css"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="favicon.png"/>
 </head>
 <body>
 <div class="k-layout">
     <div class="k-currency">
-        <p class="k-currency-amount"><?= $price->getValue() ?> руб.</p>
+        <p class="k-currency-amount"><?= $price->getValue() ?> <i class="fa fa-rub"></i></p>
 
         <p class="k-currency-date"><?= $price->getDateTime()->format('d.m.Y') ?></p>
 
