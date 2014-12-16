@@ -3,13 +3,13 @@
 namespace KNone\Grecha\Price;
 
 use KNone\Grecha\Entity\Price;
-use KNone\Grecha\Entity\PriceRepository;
+use KNone\Grecha\Entity\PriceRepositoryInterface;
 use KNone\Grecha\Price\Strategy\PriceStrategyInterface;
 
 class Importer implements ImporterInterface
 {
     /**
-     * @var PriceRepository
+     * @var PriceRepositoryInterface
      */
     private $priceRepository;
 
@@ -40,10 +40,10 @@ class Importer implements ImporterInterface
      */
     public function importPrice()
     {
-        $priceValue = $this->getPriceValueByDate(new \DateTime('yesterday'));
         $today = new \DateTime('today');
         $price = $this->getPriceRepository()->findPriceByDateTime($today);
         if (!$price) {
+            $priceValue = $this->getPriceValueByDate(new \DateTime('yesterday'));
             $this->savePrice($priceValue, $today);
         }
     }
@@ -90,7 +90,7 @@ class Importer implements ImporterInterface
     }
 
     /**
-     * @return PriceRepository
+     * @return PriceRepositoryInterface
      */
     private function getPriceRepository()
     {
@@ -106,7 +106,7 @@ class Importer implements ImporterInterface
     }
 
     /**
-     * @return Strategy\PriceStrategy
+     * @return Strategy\PriceStrategyInterface
      */
     private function getPriceStrategy()
     {

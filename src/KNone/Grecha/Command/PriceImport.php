@@ -2,6 +2,7 @@
 
 namespace KNone\Grecha\Command;
 
+use KNone\Grecha\Price\ImporterInterface;
 use Knp\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,6 +27,7 @@ class PriceImport extends Command
     {
         $output->writeln('Import process started');
         $date = $input->getArgument('date');
+        /** @var ImporterInterface $importer */
         $importer = $this->getSilexApplication()['grecha.price.importer'];
         if (empty($date)) {
             $importer->importPrice();
