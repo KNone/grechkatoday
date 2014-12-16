@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="build project" default="build">
+    <target name="build"
+            depends="git-pull, get-composer, copy-parameters, composer-install"/>
+
+    <target name="local"
+            depends="git-pull, get-composer, composer-install"/>
+
+    <target name="git-pull">
+        <exec executable="git" passthru="true">
+            <arg value="pull"/>
+        </exec>
+    </target>
+
+    <target name="copy-parameters">
+        <copy file="app/config/config.prod.yml" tofile="app/config/config.yml" overwrite="true"/>
+    </target>
+
+    <target name="get-composer">
+        <exec executable="curl" passthru="true">
+            <arg value="-sS"/>
+            <arg value="https://getcomposer.org/installer"/>
+            <arg value="|"/>
+            <arg value="php"/>
+        </exec>
+    </target>
+
+    <target name="composer-install">
+        <exec executable="php" passthru="true">
+            <arg value="composer.phar"/>
+            <arg value="install"/>
+            <arg value="--no-dev"/>
+            <arg value="--no-interaction"/>
+            <arg value="--optimize-autoloader"/>
+        </exec>
+    </target>
+</project>

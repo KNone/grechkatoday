@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$config = __DIR__ . '/config.yml';
+$config = __DIR__ . '/config/config.yml';
 
 use KNone\Grecha\GrechaServiceProvider;
 use Knp\Provider\ConsoleServiceProvider;
