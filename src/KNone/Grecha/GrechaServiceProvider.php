@@ -7,12 +7,12 @@ use KNone\Grecha\Entity\Persistence\DbalPriceRepository;
 use KNone\Grecha\ExchangeRate\ExchangerFactory;
 use KNone\Grecha\ExchangeRate\Importer;
 use KNone\Grecha\ExchangeRate\XmlRateParser;
-use KNone\Grecha\Price\Strategy\PriceStrategy;
 use KNone\Grecha\View\TemplateEngine;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use KNone\Grecha\Price\Importer as PriceImporter;
 use KNone\Grecha\Price\Parser as PriceParser;
+use KNone\Grecha\Price\Strategy\AverageCalculationStrategy as PriceStrategy;
 
 class GrechaServiceProvider implements ServiceProviderInterface
 {
@@ -30,8 +30,7 @@ class GrechaServiceProvider implements ServiceProviderInterface
         });
 
         $app['grecha.price.importer'] = function () use ($app) {
-            $parser = new PriceParser();
-            return new PriceImporter($app['grecha.price.repository'], $parser, new PriceStrategy());
+            return new PriceImporter($app['grecha.price.repository'], new PriceParser(), new PriceStrategy());
         };
 
         $app['grecha.exchange_rate.repository'] = $app->share(function () use ($app) {
