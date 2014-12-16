@@ -7,9 +7,9 @@ use Doctrine\DBAL\Types\Type;
 use KNone\Grecha\Entity\Common\AbstractRepository;
 use KNone\Grecha\Entity\Common\FieldDescription;
 use KNone\Grecha\Entity\Price;
-use KNone\Grecha\Entity\PriceRepository;
+use KNone\Grecha\Entity\PriceRepositoryInterface;
 
-class DbalPriceRepository extends AbstractRepository implements PriceRepository
+class DbalPriceRepository extends AbstractRepository implements PriceRepositoryInterface
 {
     /**
      * @return Price|null

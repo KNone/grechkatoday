@@ -7,9 +7,9 @@ use Doctrine\DBAL\Types\Type;
 use KNone\Grecha\Entity\Common\AbstractRepository;
 use KNone\Grecha\Entity\Common\FieldDescription;
 use KNone\Grecha\Entity\ExchangeRate;
-use KNone\Grecha\Entity\ExchangeRateRepository;
+use KNone\Grecha\Entity\ExchangeRateRepositoryInterface;
 
-class DbalExchangeRateRepository extends AbstractRepository implements ExchangeRateRepository
+class DbalExchangeRateRepository extends AbstractRepository implements ExchangeRateRepositoryInterface
 {
     /**
      * @return ExchangeRate|null

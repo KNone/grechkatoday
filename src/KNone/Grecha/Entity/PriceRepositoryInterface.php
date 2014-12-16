@@ -2,7 +2,7 @@
 
 namespace KNone\Grecha\Entity;
 
-interface PriceRepository
+interface PriceRepositoryInterface
 {
     /**
      * @return Price|null
