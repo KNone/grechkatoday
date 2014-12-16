@@ -2,7 +2,7 @@
 
 namespace KNone\Grecha\Price\Strategy;
 
-class PriceStrategy implements PriceStrategyInterface
+class AverageCalculationStrategy implements PriceStrategyInterface
 {
     const AVERAGE = 60;
     const DEVIATION = 0.6;

@@ -105,6 +105,9 @@ class Importer implements ImporterInterface
         return $this->parser;
     }
 
+    /**
+     * @return Strategy\PriceStrategy
+     */
     private function getPriceStrategy()
     {
         return $this->priceStrategy;

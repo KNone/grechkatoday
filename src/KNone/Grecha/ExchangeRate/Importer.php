@@ -2,7 +2,7 @@
 
 namespace KNone\Grecha\ExchangeRate;
 
-use KNone\Grecha\Entity\ExchangeRateRepository;
+use KNone\Grecha\Entity\ExchangeRateRepositoryInterface;
 
 class Importer
 {
@@ -12,15 +12,15 @@ class Importer
     private $xmlRateParser;
 
     /**
-     * @var ExchangeRateRepository
+     * @var ExchangeRateRepositoryInterface
      */
     private $exchangeRateRepository;
 
     /**
      * @param XmlRateParser $xmlRateParser
-     * @param ExchangeRateRepository $exchangeRateRepository
+     * @param ExchangeRateRepositoryInterface $exchangeRateRepository
      */
-    public function __construct(XmlRateParser $xmlRateParser, ExchangeRateRepository $exchangeRateRepository)
+    public function __construct(XmlRateParser $xmlRateParser, ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
         $this->xmlRateParser = $xmlRateParser;
         $this->exchangeRateRepository = $exchangeRateRepository;
