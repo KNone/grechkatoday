@@ -29,8 +29,12 @@ class GrechaServiceProvider implements ServiceProviderInterface
             return new DbalPriceRepository($app['dbs']['mysql']);
         });
 
+        $app['grecha.price.price_strategy'] = function () use ($app) {
+            return new PriceStrategy($app['config']['price']['strategy']);
+        };
+
         $app['grecha.price.importer'] = function () use ($app) {
-            return new PriceImporter($app['grecha.price.repository'], new PriceParser(), new PriceStrategy());
+            return new PriceImporter($app['grecha.price.repository'], new PriceParser(), $app['grecha.price.price_strategy']);
         };
 
         $app['grecha.exchange_rate.repository'] = $app->share(function () use ($app) {
