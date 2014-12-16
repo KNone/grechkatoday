@@ -2,21 +2,21 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$config = require_once __DIR__ . '/config.php';
+$config = __DIR__ . '/config.yml';
 
 use KNone\Grecha\GrechaServiceProvider;
 use Knp\Provider\ConsoleServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
+use Igorw\Silex\ConfigServiceProvider;
 
 $app = new Silex\Application();
 
-$app['debug'] = isset($config['app']['debug']) && $config['app']['debug'] === true;
+$app->register(new ConfigServiceProvider($config));
 
 $app->register(new DoctrineServiceProvider(), [
-    'dbs.options' => [
-        'mysql' => $config['mysql'],
-    ],
+    'dbs.options' => $app['config']['dbs'],
 ]);
+
 $app->register(
     new ConsoleServiceProvider(),
     [

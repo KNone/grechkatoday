@@ -4,10 +4,54 @@ namespace KNone\Grecha\Price\Strategy;
 
 class AverageCalculationStrategy implements PriceStrategyInterface
 {
-    const AVERAGE = 60;
-    const DEVIATION = 0.6;
+    /**
+     * @var int
+     */
+    private $average;
 
-    const RETAIL_RATE = 0.52;
+     /**
+     * @var float
+     */
+    private $deviation;
+
+    /**
+     * @var float
+     */
+    private $retailRate;
+
+    /**
+     * @param array $params
+     */
+    public function __construct(array $params)
+    {
+        $this->average = $params['average'];
+        $this->deviation = $params['deviation'];
+        $this->retailRate = $params['retail_rate'];
+    }
+
+    /**
+     * @return int
+     */
+    protected function getAverage()
+    {
+        return $this->average;
+    }
+
+    /**
+     * @return float
+     */
+    protected function getDeviation()
+    {
+        return $this->deviation;
+    }
+
+    /**
+     * @return float
+     */
+    protected function getRetailRate()
+    {
+        return $this->retailRate;
+    }
 
     /**
      * @param array $priceList
@@ -28,7 +72,7 @@ class AverageCalculationStrategy implements PriceStrategyInterface
         }
         if ($count > 0) {
             $price = $sum / $count;
-            $price = $price + $price * self::RETAIL_RATE;
+            $price = $price + $price * $this->getRetailRate();
         }
 
         return $price;
@@ -39,7 +83,7 @@ class AverageCalculationStrategy implements PriceStrategyInterface
      */
     private function getMax()
     {
-        return self::AVERAGE + self::AVERAGE * self::DEVIATION;
+        return $this->getAverage() + $this->getAverage() * $this->getDeviation();
     }
 
     /**
@@ -47,6 +91,6 @@ class AverageCalculationStrategy implements PriceStrategyInterface
      */
     private function getMin()
     {
-        return self::AVERAGE - self::AVERAGE * self::DEVIATION;
+        return $this->getAverage() - $this->getAverage() * $this->getDeviation();
     }
 }
