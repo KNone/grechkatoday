@@ -17,18 +17,17 @@
 <body>
 <div class="k-layout">
     <div class="k-currency">
-
-        <p class="k-currency-amount"><?= $price->getValue() ?> <i class="fa fa-rub"></i></p>
-
         <div class="k-offer">
             <ins class="adsbygoogle"
-                 style="display:inline-block;width:468px;height:15px"
+                 style="display:inline-block;width:320px;height:50px"
                  data-ad-client="ca-pub-1797214625818644"
-                 data-ad-slot="3393579185"></ins>
+                 data-ad-slot="7404976380"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
+        <p class="k-currency-amount"><?= $price->getValue() ?> <i class="fa fa-rub"></i></p>
+
         <p class="k-currency-date"><?= $price->getDateTime()->format('d.m.Y') ?></p>
 
         <p class="k-currency-any"><?= $exchanger->exchangeToUsd($price->getValue()) ?>$
