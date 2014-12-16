@@ -11,6 +11,19 @@
         });
         setHeight($window);
         setPosition($currency, $window, 1000);
+
+        var $star = $('.k-price_star');
+        var $priceInfo = $('.k-price_info');
+
+        $star.on('mouseenter', function () {
+            var position = $(this).position();
+            $priceInfo.css('left', position.left + $(this).width() + 10);
+            $priceInfo.css('top', position.top);
+            $priceInfo.show(100);
+        });
+        $star.on('mouseleave', function () {
+            $priceInfo.hide(100);
+        });
     });
     var setHeight = function ($window) {
         var $layout = $('.k-layout');
@@ -28,6 +41,8 @@
             timeout
         );
     };
+
+
 })(jQuery);
 
 
