@@ -26,12 +26,21 @@
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
-        <p class="k-currency-amount"><?= $price->getValue() ?> <i class="fa fa-rub"></i></p>
+        <div class="k-currency-amount">
+            <?= $price->getValue() ?> <i class="fa fa-rub"></i>
+            <span class="k-price_star">*</span>
 
-        <p class="k-currency-date"><?= $price->getDateTime()->format('d.m.Y') ?></p>
+            <div class="k-price_info">
+                Среднее значение цены по оптовым предложениям гречневой крупы с наценкой розничного коэффициента.
+            </div>
+        </div>
 
-        <p class="k-currency-any"><?= $exchanger->exchangeToUsd($price->getValue()) ?>$
-            <?= $exchanger->exchangeToEur($price->getValue()) ?>€</p>
+        <div class="k-currency-date"><?= $price->getDateTime()->format('d.m.Y') ?></div>
+
+        <div class="k-currency-any">
+            <?= $exchanger->exchangeToUsd($price->getValue()) ?>$
+            <?= $exchanger->exchangeToEur($price->getValue()) ?>€
+        </div>
     </div>
     <div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="small"
          data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"
