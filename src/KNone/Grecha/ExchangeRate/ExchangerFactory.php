@@ -2,19 +2,19 @@
 
 namespace KNone\Grecha\ExchangeRate;
 
-use KNone\Grecha\Entity\ExchangeRateRepository;
+use KNone\Grecha\Entity\ExchangeRateRepositoryInterface;
 
 class ExchangerFactory
 {
     /**
-     * @var ExchangeRateRepository
+     * @var ExchangeRateRepositoryInterface
      */
     private $exchangeRateRepository;
 
     /**
-     * @param ExchangeRateRepository $exchangeRateRepository
+     * @param ExchangeRateRepositoryInterface $exchangeRateRepository
      */
-    public function __construct(ExchangeRateRepository $exchangeRateRepository)
+    public function __construct(ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
         $this->exchangeRateRepository = $exchangeRateRepository;
     }

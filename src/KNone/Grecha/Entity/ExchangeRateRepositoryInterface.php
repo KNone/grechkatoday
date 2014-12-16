@@ -2,7 +2,7 @@
 
 namespace KNone\Grecha\Entity;
 
-interface ExchangeRateRepository
+interface ExchangeRateRepositoryInterface
 {
     /**
      * @return ExchangeRate|null
