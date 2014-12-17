@@ -42,9 +42,8 @@
             <?= $exchanger->exchangeToEur($price->getValue()) ?>€
         </div>
     </div>
-    <div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="small"
-         data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"
-         data-yashareTheme="counter"></div>
+    <div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="none"
+         data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div>
     <div class="k-contact"><a class="k-contact-link" href="mailto:grechka@knone.ru"
                               title="По всем вопросам пишите письма">grechka@knone.ru</a></div>
 </div>
