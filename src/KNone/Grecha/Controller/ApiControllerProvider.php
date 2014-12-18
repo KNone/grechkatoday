@@ -16,7 +16,7 @@ class ApiControllerProvider implements ControllerProviderInterface
         /** @var ControllerCollection $controllers */
         $controllers = $app['controllers_factory'];
 
-        $controllers->get('/prices/{interval}', function ($interval, Request $request, Application $app) {
+        $controllers->post('/price/statistics/{interval}', function ($interval, Request $request, Application $app) {
             if (!$request->isXmlHttpRequest()) {
                 throw new NotFoundHttpException();
             }
