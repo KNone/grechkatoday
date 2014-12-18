@@ -16,6 +16,16 @@ interface PriceRepositoryInterface
     public function findPriceByDateTime(\DateTimeInterface $dateTime);
 
     /**
+     * @return Price[]
+     */
+    public function findPricesForWeek();
+
+    /**
+     * @return Price[]
+     */
+    public function findPricesForMonth();
+
+    /**
      * @param Price $price
      */
     public function add($price);

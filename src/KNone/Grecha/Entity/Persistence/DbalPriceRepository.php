@@ -54,6 +54,51 @@ class DbalPriceRepository extends AbstractRepository implements PriceRepositoryI
     }
 
     /**
+     * @return Price[]
+     */
+    public function findPricesForWeek()
+    {
+        return $this->findPricesForInterval(new \DateInterval('P6D'));
+    }
+
+    /**
+     * @return Price[]
+     */
+    public function findPricesForMonth()
+    {
+        return $this->findPricesForInterval(new \DateInterval('P1M'));
+    }
+
+    /**
+     * @param \DateInterval $interval
+     * @return Price[]
+     */
+    private function findPricesForInterval(\DateInterval $interval)
+    {
+        $today = new \DateTimeImmutable('today');
+        $forDate = $today->sub($interval);
+
+        $sql = sprintf('SELECT * FROM %s p WHERE p.date_time >= ? AND p.date_time <= ? ORDER BY p.date_time ASC ', $this->getTableName());
+        /** @var Statement $statement */
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $forDate, Type::DATETIME);
+        $statement->bindValue(2, $today, Type::DATETIME);
+        $statement->execute();
+        $results = $statement->fetchAll();
+
+        if (empty($results)) {
+            return null;
+        }
+
+        $objects = [];
+        foreach ($results as $result) {
+            $objects[] = $this->createEntity($result);
+        }
+
+        return $objects;
+    }
+
+    /**
      * @return string
      */
     protected function getTableName()
