@@ -10,6 +10,12 @@ interface ExchangeRateRepositoryInterface
     public function findActualExchangeRate();
 
     /**
+     * @param \DateTimeInterface $dateTime
+     * @return ExchangeRate|null
+     */
+    public function findExchangeRateByDateTime(\DateTimeInterface $dateTime);
+
+    /**
      * @param ExchangeRate $exchangeRate
      */
     public function add($exchangeRate);

@@ -33,6 +33,27 @@ class DbalExchangeRateRepository extends AbstractRepository implements ExchangeR
     }
 
     /**
+     * @param \DateTimeInterface $date
+     * @return ExchangeRate|null
+     */
+    public function findExchangeRateByDateTime(\DateTimeInterface $date)
+    {
+        $sql = sprintf('SELECT * FROM %s p WHERE p.date_time = ? LIMIT 1', $this->getTableName());
+
+        /** @var Statement $statement */
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $date, Type::DATETIME);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        if (empty($result)) {
+            return null;
+        }
+
+        return $this->createEntity($result[0]);
+    }
+
+    /**
      * @return FieldDescription[]
      */
     protected function getFieldDescriptions()

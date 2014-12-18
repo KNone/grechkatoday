@@ -32,7 +32,7 @@ class PriceImport extends Command
         if (empty($date)) {
             $importer->importPrice();
         } else {
-            $importer->importPriceFromDateToToday(\DateTime::createFromFormat('Y-m-d H:i:s', $date . ' 00:00:00'));
+            $importer->importPriceFromDate(\DateTime::createFromFormat('Y-m-d H:i:s', $date . ' 00:00:00'));
         }
         $output->writeln('Import process finished');
 

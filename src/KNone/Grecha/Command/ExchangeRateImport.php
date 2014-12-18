@@ -4,6 +4,7 @@ namespace KNone\Grecha\Command;
 
 use KNone\Grecha\ExchangeRate\Importer;
 use Knp\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -13,7 +14,8 @@ class ExchangeRateImport extends Command
     {
         $this
             ->setName('app:import:exchange-rate')
-            ->setDescription('Import exchange rates');
+            ->setDescription('Import exchange rates')
+            ->addArgument('date', InputArgument::OPTIONAL, null); //Y-m-d;
     }
 
     /**
@@ -25,8 +27,15 @@ class ExchangeRateImport extends Command
     {
         /** @var Importer $importer */
         $importer = $this->getSilexApplication()['grecha.exchange_rate.importer'];
-        $importer->import();
+        $output->writeln('Import process started');
+        $date = $input->getArgument('date');
 
+        if (empty($date)) {
+            $importer->import();
+        } else {
+            $importer->importFromDate(\DateTime::createFromFormat('Y-m-d H:i:s', $date . ' 00:00:00'));
+        }
+        $output->writeln('Import process finished');
         return 0;
     }
 }
