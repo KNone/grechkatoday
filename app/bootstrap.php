@@ -2,30 +2,13 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$config = __DIR__ . '/config/config.yml';
+$configFileName = __DIR__ . '/config/config.yml';
 
 use KNone\Grecha\GrechaServiceProvider;
-use Knp\Provider\ConsoleServiceProvider;
-use Silex\Provider\DoctrineServiceProvider;
-use Igorw\Silex\ConfigServiceProvider;
 
 $app = new Silex\Application();
 
-$app->register(new ConfigServiceProvider($config));
-
-$app->register(new DoctrineServiceProvider(), [
-    'dbs.options' => $app['config']['dbs'],
-]);
-
-$app->register(
-    new ConsoleServiceProvider(),
-    [
-        'console.name' => 'GrechaConsole',
-        'console.version' => '1.0.0',
-        'console.project_directory' => __DIR__ . '/..',
-    ]
-);
-$app->register(new GrechaServiceProvider());
+$app->register(new GrechaServiceProvider($configFileName));
 
 $app->get('/', function () use ($app) {
     $price = $app['grecha.price.repository']->findActualPrice();
