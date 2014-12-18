@@ -5,6 +5,7 @@ namespace KNone\Grecha;
 use Igorw\Silex\ConfigServiceProvider;
 use KNone\Grecha\Entity\Persistence\DbalExchangeRateRepository;
 use KNone\Grecha\Entity\Persistence\DbalPriceRepository;
+use KNone\Grecha\ExchangeRate\ExchangeRateConverterFactory;
 use KNone\Grecha\ExchangeRate\ExchangerFactory;
 use KNone\Grecha\ExchangeRate\Importer;
 use KNone\Grecha\ExchangeRate\XmlRateParser;
@@ -73,10 +74,10 @@ class GrechaServiceProvider implements ServiceProviderInterface
             return new Importer(new XmlRateParser(), $app['grecha.exchange_rate.repository']);
         });
 
-        $app['grecha.exchanger_rate'] = $app->share(function () use ($app) {
-            $exchangerFactory = new ExchangerFactory($app['grecha.exchange_rate.repository']);
+        $app['grecha.exchange_rate.converter'] = $app->share(function () use ($app) {
+            $exchangerFactory = new ExchangeRateConverterFactory($app['grecha.exchange_rate.repository']);
 
-            return $exchangerFactory->createActualExchangerRate();
+            return $exchangerFactory->createActualExchangeRateConverter();
         });
     }
 

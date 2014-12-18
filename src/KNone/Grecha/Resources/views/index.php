@@ -1,6 +1,6 @@
 <?php
 /** @var $price \KNone\Grecha\Entity\Price */
-/** @var $exchanger \KNone\Grecha\ExchangeRate\Exchanger */
+/** @var $exchanger \KNone\Grecha\ExchangeRate\ExchangeRateConverter */
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,8 +38,8 @@
         <div class="k-currency-date"><?= $price->getDateTime()->format('d.m.Y') ?></div>
 
         <div class="k-currency-any">
-            <?= $exchanger->exchangeToUsd($price->getValue()) ?>$
-            <?= $exchanger->exchangeToEur($price->getValue()) ?>€
+            <?= $exchanger->convertRoublesToUsd($price->getValue()) ?>$
+            <?= $exchanger->convertRoublesToEur($price->getValue()) ?>€
         </div>
     </div>
     <div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="none"

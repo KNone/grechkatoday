@@ -14,7 +14,7 @@ class MainControllerProvider implements ControllerProviderInterface
         $controllers = $app['controllers_factory'];
         $controllers->get('/', function (Application $app) {
             $price = $app['grecha.price.repository']->findActualPrice();
-            $exchanger = $app['grecha.exchanger_rate'];
+            $exchanger = $app['grecha.exchange_rate.converter'];
             if (!$price) {
                 die('It\'s so bad, but site is down :-(');
             }
