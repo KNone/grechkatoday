@@ -55,7 +55,22 @@ class GrechaServiceProvider implements ServiceProviderInterface
         $app['grecha.template.engine'] = $app->share(function () {
             return new TemplateEngine();
         });
+        $this->registerPriceServices($app);
+        $this->registerExchangeRateServices($app);
+    }
 
+    /**
+     * @param Application $app
+     */
+    public function boot(Application $app)
+    {
+    }
+
+    /**
+     * @param Application $app
+     */
+    private function registerPriceServices(Application $app)
+    {
         $app['grecha.price.repository'] = $app->share(function () use ($app) {
             return new DbalPriceRepository($app['dbs']['mysql']);
         });
@@ -73,7 +88,13 @@ class GrechaServiceProvider implements ServiceProviderInterface
         $app['grecha.price.importer'] = function () use ($app) {
             return new PriceImporter($app['grecha.price.repository'], new PriceParser(), $app['grecha.price.price_strategy']);
         };
+    }
 
+    /**
+     * @param Application $app
+     */
+    private function registerExchangeRateServices(Application $app)
+    {
         $app['grecha.exchange_rate.repository'] = $app->share(function () use ($app) {
             return new DbalExchangeRateRepository($app['dbs']['mysql']);
         });
@@ -87,12 +108,5 @@ class GrechaServiceProvider implements ServiceProviderInterface
 
             return $exchangerFactory->createActualExchangeRateConverter();
         });
-    }
-
-    /**
-     * @param Application $app
-     */
-    public function boot(Application $app)
-    {
     }
 }
