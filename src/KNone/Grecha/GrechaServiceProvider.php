@@ -22,41 +22,14 @@ class GrechaServiceProvider implements ServiceProviderInterface
     /**
      * @var string
      */
-    private $configFilename;
+    private $configFileName;
 
     /**
      * @param string $configFilename
      */
-    public function __construct($configFilename)
+    public function __construct($configFileName)
     {
-        $this->configFilename = $configFilename;
-    }
-
-    /**
-     * @param Application $app
-     */
-    public function register(Application $app)
-    {
-        $app->register(new ConfigServiceProvider($this->configFilename));
-
-        $app->register(new DoctrineServiceProvider(), [
-            'dbs.options' => $app['config']['dbs'],
-        ]);
-
-        $app->register(
-            new ConsoleServiceProvider(),
-            [
-                'console.name' => 'GrechaConsole',
-                'console.version' => '1.0.0',
-                'console.project_directory' => __DIR__ . '/..',
-            ]
-        );
-
-        $app['grecha.template.engine'] = $app->share(function () {
-            return new TemplateEngine();
-        });
-        $this->registerPriceServices($app);
-        $this->registerExchangeRateServices($app);
+        $this->configFileName = $configFileName;
     }
 
     /**
@@ -67,9 +40,79 @@ class GrechaServiceProvider implements ServiceProviderInterface
     }
 
     /**
+     * @return string
+     */
+    public function getConfigFileName()
+    {
+        return $this->configFileName;
+    }
+
+    /**
      * @param Application $app
      */
-    private function registerPriceServices(Application $app)
+    public function register(Application $app)
+    {
+        $this->registerConfig($app, $this->getConfigFileName());
+
+        $register = [
+                'doctrine',
+                'console',
+                'templateEngine',
+                'price',
+                'exchangeRate',
+            ];
+
+        foreach ($register as $service) {
+            $this->{'register'.$service}($app);
+        }
+    }
+
+    /**
+     * @param Application $app
+     * @param string      $config
+     */
+    protected function registerConfig($app, $config)
+    {
+        $app->register(new ConfigServiceProvider($config));
+    }
+
+    /**
+     * @param Application $app
+     */
+    protected function registerDoctrine($app) {
+        $app->register(new DoctrineServiceProvider(), [
+            'dbs.options' => $app['config']['dbs'],
+        ]);
+    }
+
+    /**
+     * @param Application $app
+     */
+    protected function registerConsole($app) {
+        $app->register(
+            new ConsoleServiceProvider(),
+            [
+                'console.name' => 'GrechaConsole',
+                'console.version' => '1.0.0',
+                'console.project_directory' => __DIR__.'/..',
+            ]
+        );
+    }
+
+    /**
+     * @param Application $app
+     */
+    protected function registerTemplateEngine($app) {
+        $app['grecha.template.engine'] = $app->share(function () {
+            return new TemplateEngine();
+        });
+    }
+
+
+    /**
+     * @param Application $app
+     */
+    protected function registerPrice(Application $app)
     {
         $app['grecha.price.repository'] = $app->share(function () use ($app) {
             return new DbalPriceRepository($app['dbs']['mysql']);
@@ -93,7 +136,7 @@ class GrechaServiceProvider implements ServiceProviderInterface
     /**
      * @param Application $app
      */
-    private function registerExchangeRateServices(Application $app)
+    protected function registerExchangeRate(Application $app)
     {
         $app['grecha.exchange_rate.repository'] = $app->share(function () use ($app) {
             return new DbalExchangeRateRepository($app['dbs']['mysql']);
