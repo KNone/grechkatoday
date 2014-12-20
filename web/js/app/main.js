@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+define(['jquery','app/chart-painter'], function ($, chartPainter) {
     'use strict';
-    console.log('test');
+    chartPainter.init($('.k-chart'));
 });

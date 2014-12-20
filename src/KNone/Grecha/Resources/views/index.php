@@ -22,6 +22,13 @@
 
 <p><?= $pricePresenter->getDifferenceInRubles() ?></p>
 
+<div class="k-chart">
+    <div>
+        <canvas id="k-chart-canvas" width="410" height="200"></canvas>
+    </div>
+    <button class="k-chart-button-week">неделя</button>/<button class="k-chart-button-month">месяц</button>
+</div>
+
 <div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="none"
      data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div>
 
