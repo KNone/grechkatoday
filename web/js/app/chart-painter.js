@@ -9,8 +9,8 @@ define(['jquery', 'chartjs'], function ($, Chart) {
         init: function ($chartBlock) {
             chartPainter.$chartBlock = $chartBlock;
             chartPainter.context = $('canvas', $chartBlock).get(0).getContext('2d');
-            chartPainter.$weekButton = $('.k-chart-button-week', $chartBlock);
-            chartPainter.$monthButton = $('.k-chart-button-month', $chartBlock);
+            chartPainter.$weekButton = $('.chart-button-week', $chartBlock);
+            chartPainter.$monthButton = $('.chart-button-month', $chartBlock);
             chartPainter.drawChartByWeek();
             chartPainter.initButtons();
         },

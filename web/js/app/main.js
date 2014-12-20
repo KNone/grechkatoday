@@ -1,8 +1,8 @@
 define(['jquery', 'app/chart-painter', 'yashare'], function ($, chartPainter) {
     'use strict';
-    chartPainter.init($('.k-chart'));
+    chartPainter.init($('.chart'));
     new Ya.share({
-        element: 'k-social',
+        element: 'social',
         elementStyle: {
             'type': 'button',
             'quickServices': ['vkontakte', 'facebook', 'twitter', 'odnoklassniki', 'moimir', 'gplus']

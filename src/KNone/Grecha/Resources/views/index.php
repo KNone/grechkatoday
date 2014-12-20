@@ -21,14 +21,14 @@
 
 <p><?= $pricePresenter->getDifferenceInRubles() ?></p>
 
-<div class="k-chart">
+<div class="chart">
     <div>
-        <canvas id="k-chart-canvas" width="410" height="200"></canvas>
+        <canvas id="chart-canvas" width="410" height="200"></canvas>
     </div>
-    <button class="k-chart-button-week">неделя</button>/<button class="k-chart-button-month">месяц</button>
+    <button class="chart-button-week">неделя</button>/<button class="k-chart-button-month">месяц</button>
 </div>
 
-<div id="k-social" class="k-social"></div>
+<div id="social" class="social"></div>
 
 <script <?= ($debug ? 'data-main="js/app"' : 'data-main="js/scripts"') ?> src="js/lib/require.js"></script>
 <script>
