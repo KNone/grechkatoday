@@ -10,6 +10,11 @@ interface PriceRepositoryInterface
     public function findActualPrice();
 
     /**
+     * @return PriceStack
+     */
+    public function getPriceStack();
+
+    /**
      * @param \DateTimeInterface $dateTime
      * @return Price|null
      */

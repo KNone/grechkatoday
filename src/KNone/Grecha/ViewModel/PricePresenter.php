@@ -2,40 +2,30 @@
 
 namespace KNone\Grecha\ViewModel;
 
-use KNone\Grecha\Entity\Price;
+use KNone\Grecha\Entity\PriceStack;
 use KNone\Grecha\ExchangeRate\ExchangeRateConverter;
 
 class PricePresenter
 {
     /**
-     * @var Price
-     */
-    private $actualPrice;
-
-    /**
-     * @var Price
-     */
-    private $previousPrice;
-
-    /**
      * @var ExchangeRateConverter
      */
     private $exchangeRateConverter;
+    /**
+     * @var PriceStack
+     */
+    private $priceStack;
 
     /**
-     * @param Price $actualPrice
-     * @param Price $previousPrice
+     * @param PriceStack $priceStack
      * @param ExchangeRateConverter $exchangeRateConverter
      */
     public function __construct(
-        Price $actualPrice,
-        Price $previousPrice,
+        PriceStack $priceStack,
         ExchangeRateConverter $exchangeRateConverter
     ) {
-
-        $this->actualPrice = $actualPrice;
-        $this->previousPrice = $previousPrice;
         $this->exchangeRateConverter = $exchangeRateConverter;
+        $this->priceStack = $priceStack;
     }
 
     /**
@@ -43,7 +33,7 @@ class PricePresenter
      */
     public function getRubles()
     {
-        return $this->actualPrice->getValue();
+        return $this->priceStack->getActualPrice()->getValue();
     }
 
     /**
@@ -52,7 +42,7 @@ class PricePresenter
     public function getDollars()
     {
         return $this->exchangeRateConverter
-            ->convertRoublesToUsd($this->actualPrice->getValue());
+            ->convertRoublesToUsd($this->priceStack->getActualPrice()->getValue());
     }
 
     /**
@@ -61,7 +51,7 @@ class PricePresenter
     public function getEuro()
     {
         return $this->exchangeRateConverter
-            ->convertRoublesToEur($this->actualPrice->getValue());
+            ->convertRoublesToEur($this->priceStack->getActualPrice()->getValue());
     }
 
     /**
@@ -69,6 +59,9 @@ class PricePresenter
      */
     public function getDifferenceInRubles()
     {
-        return $this->actualPrice->getValue() - $this->previousPrice->getValue();
+        return round(
+            $this->priceStack->getActualPrice()->getValue() - $this->priceStack->getPreviousPrice()->getValue(),
+            2
+        );
     }
 }
