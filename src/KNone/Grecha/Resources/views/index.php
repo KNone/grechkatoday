@@ -25,7 +25,7 @@
     <div>
         <canvas id="chart-canvas" width="410" height="200"></canvas>
     </div>
-    <button class="chart-button-week">неделя</button>/<button class="k-chart-button-month">месяц</button>
+    <button class="chart-button-week">неделя</button>/<button class="chart-button-month">месяц</button>
 </div>
 
 <div id="social" class="social"></div>
