@@ -29,10 +29,12 @@
     <button class="k-chart-button-week">неделя</button>/<button class="k-chart-button-month">месяц</button>
 </div>
 
-<div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="none"
-     data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div>
+<div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="small"
+     data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"
+     data-yashareTheme="counter">
+</div>
 
-<script<?= ($debug ? 'data-main="js/app"' : 'data-main="js/scripts"') ?> src="js/lib/require.js"></script>
+<script <?= ($debug ? 'data-main="js/app"' : 'data-main="js/scripts"') ?> src="js/lib/require.js"></script>
 <script>
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
