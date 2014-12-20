@@ -25,7 +25,7 @@ class GrechaServiceProvider implements ServiceProviderInterface
     private $configFileName;
 
     /**
-     * @param string $configFilename
+     * @param string $configFileName
      */
     public function __construct($configFileName)
     {

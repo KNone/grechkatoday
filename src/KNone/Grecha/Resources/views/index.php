@@ -1,26 +1,33 @@
 <?php
 /** @var $pricePresenter \KNone\Grecha\ViewModel\PricePresenter */
+/** @var $debug boolean */
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Гречка Тудэй | Сколько стоит гречка сегодня?</title>
-    <meta name="keywords"
-          content="гречка, греча, курс гречи, килограмм гречки, гречневая крупа, стоимость гречки, grechkatoday, grechka, гручка тудэй, гречка сегодня, доллар, евро"/>
+    <meta name="keywords" content="гречка, греча, курс гречи, килограмм гречки, гречневая крупа, стоимость гречки, grechkatoday, grechka, гручка тудэй, гречка сегодня, доллар, евро"/>
     <meta name="description" content="Сколько стоит гречка сегодня на прилавках российских магазинов. Курс гречки по отношению в рублю, доллару и евро."/>
     <link rel="stylesheet" href="css/styles.css" type="text/css"/>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="favicon.png"/>
 </head>
 <body>
-<p><?=$pricePresenter->getRubles()?></p>
-<p><?=$pricePresenter->getEuro()?></p>
-<p><?=$pricePresenter->getDollars()?></p>
-<p><?=$pricePresenter->getDifferenceInRubles()?></p>
+<p><?= $pricePresenter->getRubles() ?></p>
+
+<p><?= $pricePresenter->getEuro() ?></p>
+
+<p><?= $pricePresenter->getDollars() ?></p>
+
+<p><?= $pricePresenter->getDifferenceInRubles() ?></p>
+
 <div class="yashare-auto-init k-social" data-yashareL10n="ru" data-yashareType="none"
      data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div>
-    <script data-main="js/app" src="js/lib/require.js"></script>
+
+<script
+    <?= ($debug ? 'data-main="js/app"' : 'data-main="js/scripts"') ?>
+    src="js/lib/require.js"></script>
 <script>
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;

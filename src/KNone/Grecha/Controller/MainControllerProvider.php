@@ -31,7 +31,8 @@ class MainControllerProvider implements ControllerProviderInterface
             return $app['grecha.template.engine']->render(
                 'index',
                 [
-                    'pricePresenter' => $pricePresenter
+                    'pricePresenter' => $pricePresenter,
+                    'debug' => $app['debug']
                 ]
             );
         });
