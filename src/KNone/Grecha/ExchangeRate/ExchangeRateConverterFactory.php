@@ -4,7 +4,7 @@ namespace KNone\Grecha\ExchangeRate;
 
 use KNone\Grecha\Entity\ExchangeRateRepositoryInterface;
 
-class ExchangerFactory
+class ExchangeRateConverterFactory
 {
     /**
      * @var ExchangeRateRepositoryInterface
@@ -20,10 +20,10 @@ class ExchangerFactory
     }
 
     /**
-     * @return Exchanger
+     * @return ExchangeRateConverter
      */
-    public function createActualExchangerRate()
+    public function createActualExchangeRateConverter()
     {
-        return new Exchanger($this->exchangeRateRepository->findActualExchangeRate());
+        return new ExchangeRateConverter($this->exchangeRateRepository->findActualExchangeRate());
     }
 }

@@ -5,7 +5,7 @@ namespace KNone\Grecha\Price\Strategy;
 class AverageCalculationStrategy implements PriceStrategyInterface
 {
     /**
-     * @var int
+     * @var float
      */
     private $average;
 
@@ -20,17 +20,19 @@ class AverageCalculationStrategy implements PriceStrategyInterface
     private $retailRate;
 
     /**
-     * @param array $params
+     * @param float $average
+     * @param float $deviation
+     * @param float $retailRate
      */
-    public function __construct(array $params)
+    public function __construct($average, $deviation, $retailRate)
     {
-        $this->average = $params['average'];
-        $this->deviation = $params['deviation'];
-        $this->retailRate = $params['retail_rate'];
+        $this->average = $average;
+        $this->deviation = $deviation;
+        $this->retailRate = $retailRate;
     }
 
     /**
-     * @return int
+     * @return float
      */
     protected function getAverage()
     {
@@ -54,7 +56,7 @@ class AverageCalculationStrategy implements PriceStrategyInterface
     }
 
     /**
-     * @param array $priceList
+     * @param float[] $priceList
      * @return float|null
      */
     public function calculate(array $priceList)

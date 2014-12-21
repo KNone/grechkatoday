@@ -12,5 +12,5 @@ interface ImporterInterface
     /**
      * @param  \DateTimeInterface $date
      */
-    public function importPriceFromDateToToday(\DateTimeInterface $date);
+    public function importPriceFromDate(\DateTimeInterface $date);
 }

@@ -51,17 +51,18 @@ class Importer implements ImporterInterface
     /**
      * {@inheritdoc}
      */
-    public function importPriceFromDateToToday(\DateTimeInterface $date)
+    public function importPriceFromDate(\DateTimeInterface $date)
     {
         $currentDate = new \DateTimeImmutable('yesterday');
+        $interval = new \DateInterval('P1D');
         while ($currentDate >= $date) {
-            $nextDay = $currentDate->add(new \DateInterval('P1D'));
+            $nextDay = $currentDate->add($interval);
             $price = $this->getPriceRepository()->findPriceByDateTime($nextDay);
             if (!$price) {
                 $priceValue = $this->getPriceValueByDate($currentDate);
                 $this->savePrice($priceValue, $nextDay);
             }
-            $currentDate = $currentDate->sub(new \DateInterval('P1D'));
+            $currentDate = $currentDate->sub($interval);
         }
     }
 
@@ -89,6 +90,9 @@ class Importer implements ImporterInterface
                 $this->getPriceRepository()->add(new Price($value, $dateTime));
                 $this->getPriceRepository()->commit();
             }
+            $price = $this->getPriceRepository()->findActualPrice();
+            $this->getPriceRepository()->add($price = new Price($price->getValue(), $price->getDateTime()));
+            $this->getPriceRepository()->commit();
         }
     }
 

@@ -38,4 +38,22 @@ class Importer
             $this->exchangeRateRepository->commit();
         }
     }
+
+    /**
+     * @param \DateTimeInterface $date
+     */
+    public function importFromDate(\DateTimeInterface $date)
+    {
+        $currentDate = new \DateTimeImmutable('today');
+        $interval = new \DateInterval('P1D');
+        while ($currentDate >= $date) {
+            $exchangeRate = $this->exchangeRateRepository->findExchangeRateByDateTime($currentDate);
+            if (!$exchangeRate) {
+                $exchangeRate = $this->xmlRateParser->getExchangeRateByDate($currentDate);
+                $this->exchangeRateRepository->add($exchangeRate);
+                $this->exchangeRateRepository->commit();
+            }
+            $currentDate = $currentDate->sub($interval);
+        }
+    }
 }
