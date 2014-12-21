@@ -70,7 +70,7 @@ define(['jquery', 'chartjs'], function ($, Chart) {
             chartPainter.currentLine = new Chart(chartPainter.context).Line(
                 chartData,
                 {
-                    scaleShowGridLines: true,
+                    scaleShowGridLines: false,
                     scaleGridLineColor: "rgba(0,0,0,.05)",
                     scaleGridLineWidth: 1,
                     bezierCurve: false,
@@ -86,15 +86,15 @@ define(['jquery', 'chartjs'], function ($, Chart) {
 
         },
         drawChartByWeek: function () {
-            chartPainter.$weekButton.attr('disabled', 'disabled');
-            chartPainter.$monthButton.removeAttr('disabled');
+            chartPainter.$weekButton.parent('li').addClass('b-list__item_state_selected');
+            chartPainter.$monthButton.parent('li').removeClass('b-list__item_state_selected');
             chartPainter.loadPrices('week', function (json) {
                 chartPainter.drawChart(json);
             })
         },
         drawChartByMonth: function () {
-            chartPainter.$monthButton.attr('disabled', 'disabled');
-            chartPainter.$weekButton.removeAttr('disabled');
+            chartPainter.$monthButton.parent('li').addClass('b-list__item_state_selected');
+            chartPainter.$weekButton.parent('li').removeClass('b-list__item_state_selected');
             chartPainter.loadPrices('month', function (json) {
                 chartPainter.drawChart(json);
             })
