@@ -12,15 +12,26 @@ define(['jquery', 'chartjs'], function ($, Chart) {
             chartPainter.$weekButton = $('.chart-button-week', $chartBlock);
             chartPainter.$monthButton = $('.chart-button-month', $chartBlock);
             chartPainter.drawChartByWeek();
+            chartPainter.toggleButtonStyle(chartPainter.$weekButton);
             chartPainter.initButtons();
         },
         initButtons: function () {
-            chartPainter.$weekButton.on('click', function () {
+            chartPainter.$weekButton.on('click', function (e) {
+                e.preventDefault();
+                chartPainter.toggleButtonStyle($(this));
                 chartPainter.drawChartByWeek();
             });
-            chartPainter.$monthButton.on('click', function () {
+            chartPainter.$monthButton.on('click', function (e) {
+                e.preventDefault();
+                chartPainter.toggleButtonStyle($(this));
                 chartPainter.drawChartByMonth();
             });
+        },
+        toggleButtonStyle: function ($activeButton) {
+            chartPainter.$monthButton.removeClass('active');
+            chartPainter.$weekButton.removeClass('active');
+
+            $activeButton.addClass('active');
         },
         prepareJson: function (json) {
             var data = {
@@ -41,12 +52,12 @@ define(['jquery', 'chartjs'], function ($, Chart) {
                 datasets: [
                     {
                         label: "",
-                        fillColor: "rgba(220,220,220,0.2)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        fillColor: "rgba(100,182,177,0.2)",
+                        strokeColor: "rgba(100,182,177,1)",
+                        pointColor: "rgba(100,182,177,1)",
+                        pointStrokeColor: "rgba(70,67,58,0)",
+                        pointHighlightFill: "rgba(206,83,77,1)",
+                        pointHighlightStroke: "rgba(206,83,77,0.2)",
                         data: data.values
                     }
                 ]
@@ -59,7 +70,7 @@ define(['jquery', 'chartjs'], function ($, Chart) {
             chartPainter.currentLine = new Chart(chartPainter.context).Line(
                 chartData,
                 {
-                    scaleShowGridLines: false,
+                    scaleShowGridLines: true,
                     scaleGridLineColor: "rgba(0,0,0,.05)",
                     scaleGridLineWidth: 1,
                     bezierCurve: false,

@@ -1,6 +1,6 @@
 define(['jquery', 'app/chart-painter', 'yashare'], function ($, chartPainter) {
     'use strict';
-    chartPainter.init($('.chart'));
+    chartPainter.init($('.charts'));
     new Ya.share({
         element: 'social',
         elementStyle: {
