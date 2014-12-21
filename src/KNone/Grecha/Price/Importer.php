@@ -90,9 +90,6 @@ class Importer implements ImporterInterface
                 $this->getPriceRepository()->add(new Price($value, $dateTime));
                 $this->getPriceRepository()->commit();
             }
-            $price = $this->getPriceRepository()->findActualPrice();
-            $this->getPriceRepository()->add($price = new Price($price->getValue(), $price->getDateTime()));
-            $this->getPriceRepository()->commit();
         }
     }
 
