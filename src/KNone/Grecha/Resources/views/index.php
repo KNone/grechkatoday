@@ -36,8 +36,7 @@
                     </div>
                 </div>
                 <div class="b-box b-box_content_today-date">
-                    <time class="b-date" datetime="<?= date('Y-m-d') ?>"><?= date('F j') ?>
-                        <sup><?= $helper->getDateEnds() ?></sup></time>
+                    <time class="b-date" datetime="<?=date('Y-m-d')?>"><?=date('F j')?><sup><?=$helper->getDateEnds()?></sup></time>
                 </div>
             </div>
         </div>
@@ -46,16 +45,16 @@
             <div class="b-stripe__in">
                 <div class="b-cost-buckwheat">
                     <div class="b-cost-buckwheat__value b-cost-buckwheat__value_currency_ru">
-								<span class="b-cost-buckwheat__value-text">
-									<span
+                                <span class="b-cost-buckwheat__value-text">
+                                    <span
                                         class="<?= $pricePresenter->getDifferenceInRubles() <= 0 ? 'cost_down' : 'cost_up' ?>"><?= $pricePresenter->getRubles() ?></span>
-									<span class="b-remark b-remark_price_currency_ru">
-										<span class="b-remark__icon"></span>
-										<span class="b-remark__dropdown">
-											Среднее значение цены по&nbsp;оптовым предложениям гречневой крупы с&nbsp;наценкой розничного коэффициента
-										</span>
-									</span>
-								</span>
+                                    <span class="b-remark b-remark_price_currency_ru">
+                                        <span class="b-remark__icon"></span>
+                                        <span class="b-remark__dropdown">
+                                            Среднее значение цены по&nbsp;оптовым предложениям гречневой крупы с&nbsp;наценкой розничного коэффициента
+                                        </span>
+                                    </span>
+                                </span>
                     </div>
                     <div class="b-cost-buckwheat__value b-cost-buckwheat__value_currency_other">
                         <div class="b-content-columns b-content-columns_content_currency-other">
@@ -82,13 +81,13 @@
                     <div class="b-story__content">
                         <ul class="b-list b-list_content_select-period">
                             <li class="b-list__item">
-                                <a class="b-list__item-text chart-button-month">месяц</a>
+                                <a class="b-list__item-text chart-button-week">неделя</a>
                             </li>
                             <li class="b-list__item b-list__item_type_delimiter">
                                 <span class="b-list__item-text">/</span>
                             </li>
                             <li class="b-list__item">
-                                <a class="b-list__item-text chart-button-week">неделя</a>
+                                <a class="b-list__item-text chart-button-month">месяц</a>
                             </li>
                         </ul>
                     </div>
