@@ -58,8 +58,7 @@
             </div>
             <div class="ads"></div>
             <div class="footer">
-                <div class="yashare-auto-init social" data-yashareL10n="ru" data-yashareType="none"
-         data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div>
+                <div id="social" class="social"></div>
                 <div class="contacts"><a class="k-contact-link" href="mailto:grechka@knone.ru" title="По всем вопросам пишите письма">grechka@knone.ru</a></div>
             </div>
         </div>
