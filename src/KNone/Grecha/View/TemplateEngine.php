@@ -3,6 +3,7 @@
 namespace KNone\Grecha\View;
 
 use KNone\Grecha\View\Exception\InvalidTemplateNameException;
+use KNone\Grecha\View\Helper as ViewHelper;
 
 class TemplateEngine
 {
@@ -18,6 +19,7 @@ class TemplateEngine
 
         ob_start();
 
+        $helper = new ViewHelper();
         $viewPath = realpath(__DIR__ . '/../Resources/views/' . $name . '.php');
         if ($viewPath) {
             require $viewPath;

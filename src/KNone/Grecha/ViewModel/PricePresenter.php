@@ -64,4 +64,26 @@ class PricePresenter
             2
         );
     }
+
+    /**
+     * @return string
+     */
+    public function getDifferenceInRublesFormatted()
+    {
+        $price = $this->getDifferenceInRubles();
+
+        $sign = $price>0?1:($price!=0?-1:0);
+        $price = number_format(abs($price), 2);
+
+        switch ($sign) {
+            case 1:
+                $price = '+ ' . $price;
+                break;
+            case -1:
+                $price = '- ' . $price;
+                break;
+        }
+
+        return $price;
+    }
 }

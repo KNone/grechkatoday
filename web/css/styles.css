@@ -1,117 +1,350 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=cyrillic,cyrillic-ext,latin);
+html {
+    color: #000;
+    background: #FFF
+}
+
+blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+fieldset, img {
+    border: 0
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: 400
+}
+
+ol, ul {
+    list-style: none
+}
+
+caption, th {
+    text-align: left
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: 400
+}
+
+q:after, q:before {
+    content: ''
+}
+
+abbr, acronym {
+    border: 0;
+    font-variant: normal
+}
+
+sup {
+    vertical-align: text-top
+}
+
+sub {
+    vertical-align: text-bottom
+}
+
+input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit
+}
+
+legend {
+    color: #000
+}
+
+#yui3-css-stamp.cssreset {
+    display: none
+}
 
 body, html {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 14px;
-    vertical-align: baseline;
-    background-color: transparent;
-    font-family: 'Open Sans Condensed', sans-serif;
+    height: 100%
 }
 
-.k-layout {
-    background: transparent url('../images/background.jpg') no-repeat;
-    width: 100%;
-    background-size: cover;
-    position: absolute;
+body {
+    min-width: 420px
 }
 
-.k-currency {
-    font-weight: bold;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.7);
-    text-shadow: 0 5px 25px rgba(250, 250, 250, 0.6);
-    padding: 0;
-    width: 520px;
-    margin: 0 auto;
+.b-page {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    background: #dcd2b7 url('../images/bg.png');
 }
 
-.k-currency-amount {
-    font-size: 150px;
-    letter-spacing: -2px;
-    margin: 0;
-    padding: 0;
-    position: relative;
+.b-page__in {
+    padding-bottom: 70px;
+    width: 420px;
+    margin: 0 auto
 }
 
-.k-currency-date {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 15px 15px 15px 15px;
-    -moz-border-radius: 15px 15px 15px 15px;
-    -webkit-border-radius: 15px 15px 15px 15px;
-    border: 0 solid #000000;
-    display: inline-block;
-    width: 200px;
-    font-size: 35px;
-    margin: 0 20px;
-    padding: 0;
+.b-footer {
+    margin-top: -60px;
+    height: 60px
 }
 
-.k-currency-any {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 15px 15px 15px 15px;
-    -moz-border-radius: 15px 15px 15px 15px;
-    -webkit-border-radius: 15px 15px 15px 15px;
-    border: 0 solid #000000;
-    display: inline-block;
-    width: 200px;
-    font-size: 35px;
-    margin: 0 20px;
-    padding: 0;
+.b-footer__in {
+    width: 420px;
+    margin: 0 auto
 }
 
-.yashare-auto-init {
-    margin-top: 5px;
+.b-box_content_main-logo {
+    padding-top: 100px
 }
 
-.k-contact {
+.b-logo_content_main {
+    width: 344px;
+    height: 120px;
+    margin: 0 auto
+}
+
+.b-logo_content_main .b-logo__thumbnail {
     display: block;
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-}
-
-a.k-contact-link {
-    color: rgba(0, 0, 0, 0.7);
-    font-weight: bold;
-    font-size: 19px;
-    text-shadow: 0 5px 25px rgba(250, 250, 250, 0.6);
-}
-
-a.k-contact-link:hover {
     text-decoration: none;
+    width: 344px;
+    height: 120px;
+    position: relative
 }
 
-.k-social {
-    width: 100%;
-    text-align: center;
+.b-logo_content_main .b-logo__thumbnail img {
+    vertical-align: top
+}
+
+.b-ico {
+    position: absolute
+}
+
+.b-ico_viewtype_logo-decor {
+    background: url(../images/icons/i-logo-decor.png) no-repeat;
+    width: 325px;
+    height: 156px;
+    top: 63px;
+    left: -155px
+}
+
+.b-box_content_today-date {
+    width: 344px;
+    margin: 8px auto 0;
+    text-align: right
+}
+
+.b-date {
+    font: 700 24px/28px Tahoma, "Geneva CY", sans-serif;
+    color: #ce534d
+}
+
+.b-date sup {
+    font-size: 14px
+}
+
+.b-stripe_content_present-value {
+    margin-top: 111px;
+    text-align: center
+}
+
+.b-cost-buckwheat {
+    display: inline-block;
+    text-align: left
+}
+
+.b-cost-buckwheat__value_currency_ru .b-cost-buckwheat__value-text {
+    position: relative;
+    padding-right: 120px;
+    display: inline-block;
+    font: 100px/104px Tahoma, "Geneva CY", sans-serif;
+    letter-spacing: -7px
+}
+
+.b-cost-buckwheat__value_currency_ru .b-cost-buckwheat__value-text:after {
+    background: url(../images/icons/i-currency-ru.png) no-repeat;
+    width: 55px;
+    height: 73px;
     position: absolute;
-    bottom: 15px;
+    content: "";
+    right: 32px;
+    top: 50%;
+    margin-top: -33px
 }
 
-.k-offer {
-    opacity: 0.8;
-}
-
-.k-price_star {
-    cursor: pointer;
+.b-remark_price_currency_ru {
     position: absolute;
+    width: 24px;
+    height: 22px;
     display: block;
     right: 0;
-    top: 0;
-    font-size: 100px;
-    /*float: right;*/
+    top: 50%;
+    margin-top: -44px
 }
 
-.k-price_info {
-    display: none;
-    font-size: 15px;
-    background-color: rgba(255, 255, 255, 0.6);
-    width: 230px;
-    text-shadow: none;
-    letter-spacing: 1px;
+.b-remark_price_currency_ru .b-remark__icon {
+    background-image: url(../images/icons/i-remark-price-currency-ru.png);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 22px;
+    display: block;
+    cursor: pointer
+}
+
+.b-remark_price_currency_ru .b-remark__icon:hover {
+    background-position: 0 0
+}
+
+.b-remark_price_currency_ru .b-remark__dropdown {
+    font: 14px/18px Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
+    color: #46433a;
+    letter-spacing: normal;
     position: absolute;
-    padding: 3px;
+    width: 210px;
+    text-align: left;
+    box-sizing: border-box;
+    border-left: 3px solid #64b6b1;
+    background: #bcccb7;
+    padding: 6px;
+    top: 2px;
+    left: 100%;
+    margin-left: 12px;
+    display: none
+}
+
+.b-remark_price_currency_ru:hover .b-remark__dropdown {
+    display: block
+}
+
+.b-content-columns_content_currency-other {
+    text-align: justify;
+    text-justify: newspaper;
+    font: 0/0 a
+}
+
+.b-content-columns_content_currency-other:after {
+    content: "";
+    display: inline-block;
+    font: 0/0 Arial, a !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: top;
+    visibility: hidden;
+    width: 100% !important
+}
+
+.b-content-columns_content_currency-other .b-content-column {
+    display: inline-block;
+    font: 14px/18px Tahoma, "Geneva CY", sans-serif;
+    vertical-align: top
+}
+
+.b-cost-buckwheat__value_currency_other {
+    padding-right: 30px;
+    padding-left: 4px
+}
+
+.b-size-changes {
+    font: 24px/28px Tahoma, "Geneva CY", sans-serif;
+    color: #46433a
+}
+
+.b-value_currency_eur, .b-value_currency_usd {
+    position: relative;
+    font: 24px/28px Tahoma, "Geneva CY", sans-serif;
+    color: #46433a
+}
+
+.b-value_currency_usd:after {
+    content: "$"
+}
+
+.b-value_currency_eur:after {
+    content: "\20AC"
+}
+
+.b-story_content_diagram-cost .b-story__thumbnail {
+    width: 414px;
+    height: 218px;
+    margin: 0 auto
+}
+
+.b-story_content_diagram-cost .b-story__content {
+    margin-top: 12px
+}
+
+.b-list_content_select-period {
+    list-style-type: none;
+    font: 0/0 a;
+    text-align: center
+}
+
+.b-list_content_select-period .b-list__item {
+    font: 14px/18px Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
+    display: inline-block;
+    color: #46433a
+}
+
+.b-list_content_select-period .b-list__item_state_selected {
+    color: #ce534d
+}
+
+.b-list_content_select-period .b-list__item_type_delimiter {
+    padding: 0 5px;
+    color: #ce534d
+}
+
+.b-list_content_select-period .b-list__item a.b-list__item-text {
+    cursor: pointer
+}
+
+.b-list_content_select-period .b-list__item_state_selected a.b-list__item-text {
+    cursor: default
+}
+
+.b-stripe_content_diagram-cost {
+    margin-top: 46px
+}
+
+.b-stripe_content_social-like .b-stripe__in {
+    text-align: center
+}
+
+.b-box_content_social-like {
+    display: inline-block
+}
+
+.b-box_content_social-like img {
+    vertical-align: top
+}
+
+.b-box_content_mailto {
+    text-align: center
+}
+
+.b-box_content_mailto a {
+    font: 14px/18px Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
+    text-decoration: none;
+    color: #46433a
+}
+
+.b-box_content_mailto a:hover {
+    text-decoration: underline
+}
+
+.b-stripe_content_contacts {
+    margin-top: 6px
+}
+
+.cost_up {
+    color: #c6491a;
+}
+
+.cost_down {
+    color: #48a670;
 }
