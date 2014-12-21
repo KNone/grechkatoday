@@ -4,7 +4,7 @@ namespace KNone\Grecha\ExchangeRate;
 
 use KNone\Grecha\Entity\ExchangeRate;
 
-class Exchanger
+class ExchangeRateConverter
 {
     /**
      * @var ExchangeRate
@@ -23,7 +23,7 @@ class Exchanger
      * @param float $value
      * @return float
      */
-    public function exchangeToUsd($value)
+    public function convertRoublesToUsd($value)
     {
         return round($value / $this->exchangeRate->getUsd(), 2);
     }
@@ -32,7 +32,7 @@ class Exchanger
      * @param float $value
      * @return float
      */
-    public function exchangeToEur($value)
+    public function convertRoublesToEur($value)
     {
         return round($value / $this->exchangeRate->getEur(), 2);
     }

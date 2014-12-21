@@ -12,10 +12,10 @@ class XmlRateParser
     const CODE_DOLLAR = 'USD';
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      * @return ExchangeRate
      */
-    public function getExchangeRateByDate(\DateTime $dateTime)
+    public function getExchangeRateByDate(\DateTimeInterface $dateTime)
     {
         $usd = null;
         $eur = null;
@@ -44,10 +44,10 @@ class XmlRateParser
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTimeInterface $dateTime
      * @return string
      */
-    private function requestRateByDate(\DateTime $dateTime)
+    private function requestRateByDate(\DateTimeInterface $dateTime)
     {
         $dateString = $dateTime->format(self::DATE_STRING_FORMAT);
 

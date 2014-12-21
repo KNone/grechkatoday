@@ -8,6 +8,7 @@ use KNone\Grecha\Entity\Common\AbstractRepository;
 use KNone\Grecha\Entity\Common\FieldDescription;
 use KNone\Grecha\Entity\Price;
 use KNone\Grecha\Entity\PriceRepositoryInterface;
+use KNone\Grecha\Entity\PriceStack;
 
 class DbalPriceRepository extends AbstractRepository implements PriceRepositoryInterface
 {
@@ -33,6 +34,30 @@ class DbalPriceRepository extends AbstractRepository implements PriceRepositoryI
     }
 
     /**
+     * @return PriceStack|null
+     */
+    public function getPriceStack()
+    {
+        $date = new \DateTime('today');
+        $sql = sprintf('SELECT * FROM %s p WHERE p.date_time <= ? ORDER BY p.date_time DESC LIMIT 2', $this->getTableName());
+
+        /** @var Statement $statement */
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $date, Type::DATETIME);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        if (empty($result) || count($result) !== 2) {
+            return null;
+        }
+
+        $actualPrice = $this->createEntity($result[0]);
+        $previousPrice = $this->createEntity($result[1]);
+
+        return new PriceStack($actualPrice, $previousPrice);
+    }
+
+    /**
      * @param \DateTimeInterface $dateTime
      * @return Price|null
      */
@@ -51,6 +76,51 @@ class DbalPriceRepository extends AbstractRepository implements PriceRepositoryI
         }
 
         return $this->createEntity($result[0]);
+    }
+
+    /**
+     * @return Price[]
+     */
+    public function findPricesForWeek()
+    {
+        return $this->findPricesForInterval(new \DateInterval('P6D'));
+    }
+
+    /**
+     * @return Price[]
+     */
+    public function findPricesForMonth()
+    {
+        return $this->findPricesForInterval(new \DateInterval('P1M'));
+    }
+
+    /**
+     * @param \DateInterval $interval
+     * @return Price[]
+     */
+    private function findPricesForInterval(\DateInterval $interval)
+    {
+        $today = new \DateTimeImmutable('today');
+        $forDate = $today->sub($interval);
+
+        $sql = sprintf('SELECT * FROM %s p WHERE p.date_time >= ? AND p.date_time <= ? ORDER BY p.date_time ASC ', $this->getTableName());
+        /** @var Statement $statement */
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(1, $forDate, Type::DATETIME);
+        $statement->bindValue(2, $today, Type::DATETIME);
+        $statement->execute();
+        $results = $statement->fetchAll();
+
+        if (empty($results)) {
+            return null;
+        }
+
+        $objects = [];
+        foreach ($results as $result) {
+            $objects[] = $this->createEntity($result);
+        }
+
+        return $objects;
     }
 
     /**
