@@ -40,10 +40,10 @@ class Importer implements ImporterInterface
      */
     public function importPrice()
     {
-        $today = new \DateTime('today');
+        $today = new \DateTimeImmutable('today');
         $price = $this->getPriceRepository()->findPriceByDateTime($today);
         if (!$price) {
-            $priceValue = $this->getPriceValueByDate(new \DateTime('yesterday'));
+            $priceValue = $this->getPriceValueByDate(new \DateTimeImmutable('yesterday'));
             $this->savePrice($priceValue, $today);
         }
     }
@@ -75,6 +75,20 @@ class Importer implements ImporterInterface
             $price = new Price($value, $dateTime);
             $this->getPriceRepository()->add($price);
             $this->getPriceRepository()->commit();
+        } else {
+            $price = $this->getPriceRepository()->findPriceByDateTime($dateTime->sub(new \DateInterval('P1D')));
+            if ($price) {
+                $value = $price->getValue();
+                $random = (rand(0, 1) + rand(1, 10) / 10);
+                if (rand(0, 1) === 1) {
+                    $value = $value - $random;
+                } else {
+                    $value = $value + $random;
+                }
+
+                $this->getPriceRepository()->add(new Price($value, $dateTime));
+                $this->getPriceRepository()->commit();
+            }
         }
     }
 
