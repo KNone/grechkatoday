@@ -70,7 +70,7 @@ define(['jquery', 'chartjs'], function ($, Chart) {
             chartPainter.currentLine = new Chart(chartPainter.context).Line(
                 chartData,
                 {
-                    scaleShowGridLines: false,
+                    scaleShowGridLines: true,
                     scaleGridLineColor: "rgba(0,0,0,.05)",
                     scaleGridLineWidth: 1,
                     bezierCurve: false,
