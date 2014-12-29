@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0cd802880aa152801440e0757b1a75aa",
+    "hash": "b6143a6cb160dab554f8df1910723875",
     "packages": [
         {
             "name": "doctrine/common",
@@ -217,7 +217,7 @@
             ],
             "authors": [
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 }
             ],
@@ -997,6 +997,21 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2014-12-02 20:19:20"
+        },
+        {
+            "name": "websharks/html-compressor",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/websharks/html-compressor",
+                "reference": "000000-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "html-compressor/includes/core.php"
+                ]
+            }
         }
     ],
     "packages-dev": [],
@@ -1006,6 +1021,7 @@
         "knplabs/console-service-provider": 20
     },
     "prefer-stable": true,
+    "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
 }

@@ -16,6 +16,7 @@ use Silex\ServiceProviderInterface;
 use KNone\Grecha\Price\Importer as PriceImporter;
 use KNone\Grecha\Price\Parser as PriceParser;
 use KNone\Grecha\Price\Strategy\AverageCalculationStrategy as PriceStrategy;
+use Websharks\Html_compressor\core as HtmlCompressor;
 
 class GrechaServiceProvider implements ServiceProviderInterface
 {
@@ -58,6 +59,7 @@ class GrechaServiceProvider implements ServiceProviderInterface
                 'doctrine',
                 'console',
                 'templateEngine',
+                'htmlCompressor',
                 'price',
                 'exchangeRate',
             ];
@@ -103,11 +105,17 @@ class GrechaServiceProvider implements ServiceProviderInterface
      * @param Application $app
      */
     protected function registerTemplateEngine($app) {
-        $app['grecha.template.engine'] = $app->share(function () {
-            return new TemplateEngine();
+        $app['grecha.template.engine'] = $app->share(function () use ($app) {
+            return new TemplateEngine($app['grecha.template.compressor']);
         });
     }
 
+    /**
+     * @param Application $app
+     */
+    protected function registerHtmlCompressor($app) {
+        $app['grecha.template.compressor'] = new HtmlCompressor();
+    }
 
     /**
      * @param Application $app

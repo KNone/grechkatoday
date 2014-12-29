@@ -8,12 +8,25 @@ use KNone\Grecha\View\Helper as ViewHelper;
 class TemplateEngine
 {
     /**
+     * @var \Websharks\Html_compressor\core
+     */
+    protected $htmlCompressor;
+
+    /**
+     * @param \Websharks\Html_compressor\core $htmlCompressor
+     */
+    public function __construct($htmlCompressor)
+    {
+        $this->htmlCompressor = $htmlCompressor;
+    }
+
+    /**
      * @param string $name
      * @param array $params
      * @return string
      * @throws \InvalidArgumentException
      */
-    public static function render($name, $params)
+    public function render($name, $params)
     {
         extract($params, EXTR_SKIP);
 
@@ -27,6 +40,24 @@ class TemplateEngine
             throw new InvalidTemplateNameException('Template name "' . $name . '" is invalid.');
         }
 
-        return ob_get_clean();
+        return $this->compressHtml(ob_get_clean());
+    }
+
+    /**
+     * @return \Websharks\Html_compressor\core
+     */
+    protected function getHtmlCompressor()
+    {
+        return $this->htmlCompressor;
+    }
+
+    /**
+     * @param  string $input
+     * @return string
+     */
+    protected function compressHtml($input)
+    {
+        $compressor = $this->getHtmlCompressor();
+        return $compressor->compress($input);
     }
 }
