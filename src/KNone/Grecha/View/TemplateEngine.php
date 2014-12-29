@@ -13,11 +13,18 @@ class TemplateEngine
     protected $htmlCompressor;
 
     /**
-     * @param \Websharks\Html_compressor\core $htmlCompressor
+     * @var bool
      */
-    public function __construct($htmlCompressor)
+    protected $compress;
+
+    /**
+     * @param \Websharks\Html_compressor\core $htmlCompressor
+     * @param bool $compress
+     */
+    public function __construct($htmlCompressor, $compress = true)
     {
         $this->htmlCompressor = $htmlCompressor;
+        $this->compress = (bool) $compress;
     }
 
     /**
@@ -40,7 +47,13 @@ class TemplateEngine
             throw new InvalidTemplateNameException('Template name "' . $name . '" is invalid.');
         }
 
-        return $this->compressHtml(ob_get_clean());
+        $output = ob_get_clean();
+
+        if ($this->needCompress()) {
+            $output = $this->compressHtml($output);
+        }
+
+        return $output;
     }
 
     /**
@@ -49,6 +62,14 @@ class TemplateEngine
     protected function getHtmlCompressor()
     {
         return $this->htmlCompressor;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function needCompress()
+    {
+        return $this->compress;
     }
 
     /**

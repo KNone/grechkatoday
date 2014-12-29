@@ -13,3 +13,11 @@ config:
             average: 60
             deviation: 0.6
             retail_rate: 0.52
+    cache:
+        dir:
+            frontend: web/cache
+            backend: cache
+        public_cdn_url: /cache
+        template_cache_time: 1 hour
+    template:
+        compress: true
