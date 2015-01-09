@@ -3,3 +3,5 @@ app/config/config.yml
 vendor
 composer.phar
 bin
+cache
+web/cache

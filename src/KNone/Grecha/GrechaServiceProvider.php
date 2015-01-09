@@ -16,6 +16,7 @@ use Silex\ServiceProviderInterface;
 use KNone\Grecha\Price\Importer as PriceImporter;
 use KNone\Grecha\Price\Parser as PriceParser;
 use KNone\Grecha\Price\Strategy\AverageCalculationStrategy as PriceStrategy;
+use Websharks\Html_compressor\core as HtmlCompressor;
 
 class GrechaServiceProvider implements ServiceProviderInterface
 {
@@ -58,6 +59,7 @@ class GrechaServiceProvider implements ServiceProviderInterface
                 'doctrine',
                 'console',
                 'templateEngine',
+                'htmlCompressor',
                 'price',
                 'exchangeRate',
             ];
@@ -73,7 +75,8 @@ class GrechaServiceProvider implements ServiceProviderInterface
      */
     protected function registerConfig($app, $config)
     {
-        $app->register(new ConfigServiceProvider($config));
+        $rootDir = realpath(__DIR__.'/../../../');
+        $app->register(new ConfigServiceProvider($config), array('root_dir' => $rootDir));
     }
 
     /**
@@ -103,11 +106,27 @@ class GrechaServiceProvider implements ServiceProviderInterface
      * @param Application $app
      */
     protected function registerTemplateEngine($app) {
-        $app['grecha.template.engine'] = $app->share(function () {
-            return new TemplateEngine();
+        $app['grecha.template.engine'] = $app->share(function () use ($app) {
+            return new TemplateEngine($app['grecha.template.compressor'],$app['config']['template']['compress']);
         });
     }
 
+    /**
+     * @param Application $app
+     */
+    protected function registerHtmlCompressor($app) {
+
+        $app['grecha.template.compressor'] = function () use ($app) {
+            $config = [
+                        'cache_dir_private' => $app['root_dir'].'/'.$app['config']['cache']['dir']['backend'],
+                        'cache_dir_public' => $app['root_dir'].'/'.$app['config']['cache']['dir']['frontend'],
+                        'cache_dir_url_public' => $app['config']['cache']['public_cdn_url'],
+                        'cache_expiration_time' => $app['debug']?'1 seconds':$app['config']['cache']['template_cache_time'],
+                        'benchmark' => $app['debug'],
+                    ];
+            return new HtmlCompressor($config);
+        };
+    }
 
     /**
      * @param Application $app

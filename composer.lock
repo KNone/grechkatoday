@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0cd802880aa152801440e0757b1a75aa",
+    "hash": "62b2b27e12cfdbea1f6d454097dfd498",
     "packages": [
         {
             "name": "doctrine/common",
@@ -217,7 +217,7 @@
             ],
             "authors": [
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 }
             ],
@@ -760,6 +760,53 @@
             "time": "2014-12-02 20:15:53"
         },
         {
+            "name": "symfony/filesystem",
+            "version": "v2.6.1",
+            "target-dir": "Symfony/Component/Filesystem",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Filesystem.git",
+                "reference": "ff6efc95256cb33031933729e68b01d720b5436b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/ff6efc95256cb33031933729e68b01d720b5436b",
+                "reference": "ff6efc95256cb33031933729e68b01d720b5436b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-12-02 20:19:20"
+        },
+        {
             "name": "symfony/http-foundation",
             "version": "v2.5.8",
             "target-dir": "Symfony/Component/HttpFoundation",
@@ -997,6 +1044,21 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2014-12-02 20:19:20"
+        },
+        {
+            "name": "websharks/html-compressor",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/websharks/html-compressor",
+                "reference": "000000-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "html-compressor/includes/core.php"
+                ]
+            }
         }
     ],
     "packages-dev": [],
@@ -1006,6 +1068,7 @@
         "knplabs/console-service-provider": 20
     },
     "prefer-stable": true,
+    "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
 }
