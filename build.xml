@@ -2,10 +2,10 @@
 
 <project name="build project" default="build">
     <target name="build"
-            depends="git-pull, get-composer, make-dirs, copy-parameters, composer-install, cache-clear"/>
+            depends="git-pull, get-composer, make-dirs, copy-parameters, composer-install"/>
 
     <target name="local"
-            depends="git-pull, get-composer, make-dirs, composer-install, cache-clear"/>
+            depends="git-pull, get-composer, make-dirs, composer-install"/>
 
     <target name="git-pull">
         <exec executable="git" passthru="true">
@@ -14,8 +14,8 @@
     </target>
 
     <target name="make-dirs">
-        <mkdir dir="${phing.dir}/cache" />
-        <mkdir dir="${phing.dir}/web/cache" />
+        <mkdir dir="${phing.dir}/cache" mode="0777" />
+        <mkdir dir="${phing.dir}/web/cache" mode="0777" />
     </target>
 
     <target name="cache-clear">
