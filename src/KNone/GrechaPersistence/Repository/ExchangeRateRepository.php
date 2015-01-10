@@ -1,15 +1,15 @@
 <?php
 
-namespace KNone\Grecha\Entity\Persistence;
+namespace KNone\GrechaPersistence\Repository;
 
 use Doctrine\DBAL\Statement;
 use Doctrine\DBAL\Types\Type;
-use KNone\Grecha\Entity\Common\AbstractRepository;
-use KNone\Grecha\Entity\Common\FieldDescription;
+use KNone\GrechaPersistence\Repository\AbstractRepository;
+use KNone\GrechaPersistence\Common\FieldDescription;
 use KNone\Grecha\Entity\ExchangeRate;
 use KNone\Grecha\Entity\ExchangeRateRepositoryInterface;
 
-class DbalExchangeRateRepository extends AbstractRepository implements ExchangeRateRepositoryInterface
+class ExchangeRateRepository extends AbstractRepository implements ExchangeRateRepositoryInterface
 {
     /**
      * @return ExchangeRate|null

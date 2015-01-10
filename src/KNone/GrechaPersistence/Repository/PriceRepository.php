@@ -1,16 +1,16 @@
 <?php
 
-namespace KNone\Grecha\Entity\Persistence;
+namespace KNone\GrechaPersistence\Repository;
 
 use Doctrine\DBAL\Statement;
 use Doctrine\DBAL\Types\Type;
-use KNone\Grecha\Entity\Common\AbstractRepository;
-use KNone\Grecha\Entity\Common\FieldDescription;
+use KNone\GrechaPersistence\Repository\AbstractRepository;
+use KNone\GrechaPersistence\Common\FieldDescription;
 use KNone\Grecha\Entity\Price;
 use KNone\Grecha\Entity\PriceRepositoryInterface;
 use KNone\Grecha\Entity\PriceStack;
 
-class DbalPriceRepository extends AbstractRepository implements PriceRepositoryInterface
+class PriceRepository extends AbstractRepository implements PriceRepositoryInterface
 {
     /**
      * @return Price|null

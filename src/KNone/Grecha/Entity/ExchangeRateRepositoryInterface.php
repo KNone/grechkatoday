@@ -2,7 +2,9 @@
 
 namespace KNone\Grecha\Entity;
 
-interface ExchangeRateRepositoryInterface
+use KNone\Grecha\Entity\BaseRepositoryInterface;
+
+interface ExchangeRateRepositoryInterface extends BaseRepositoryInterface
 {
     /**
      * @return ExchangeRate|null
@@ -14,11 +16,4 @@ interface ExchangeRateRepositoryInterface
      * @return ExchangeRate|null
      */
     public function findExchangeRateByDateTime(\DateTimeInterface $dateTime);
-
-    /**
-     * @param ExchangeRate $exchangeRate
-     */
-    public function add($exchangeRate);
-
-    public function commit();
 }

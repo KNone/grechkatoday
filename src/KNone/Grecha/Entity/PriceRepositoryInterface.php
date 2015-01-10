@@ -2,7 +2,9 @@
 
 namespace KNone\Grecha\Entity;
 
-interface PriceRepositoryInterface
+use KNone\Grecha\Entity\BaseRepositoryInterface;
+
+interface PriceRepositoryInterface extends BaseRepositoryInterface
 {
     /**
      * @return Price|null
@@ -29,11 +31,4 @@ interface PriceRepositoryInterface
      * @return Price[]
      */
     public function findPricesForMonth();
-
-    /**
-     * @param Price $price
-     */
-    public function add($price);
-
-    public function commit();
 }
