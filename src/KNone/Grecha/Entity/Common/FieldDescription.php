@@ -24,7 +24,7 @@ class FieldDescription
      * @param string $fieldName
      * @param string $type
      */
-    function __construct($propertyName, $fieldName, $type)
+    public function __construct($propertyName, $fieldName, $type)
     {
         $this->fieldName = $fieldName;
         $this->propertyName = $propertyName;
