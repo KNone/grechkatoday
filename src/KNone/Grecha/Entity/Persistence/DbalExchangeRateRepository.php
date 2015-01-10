@@ -79,6 +79,6 @@ class DbalExchangeRateRepository extends AbstractRepository implements ExchangeR
      */
     protected function getEntityClassName()
     {
-        return 'KNone\Grecha\Entity\ExchangeRate';
+        return ExchangeRate::class;
     }
 }

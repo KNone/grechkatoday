@@ -136,7 +136,7 @@ class DbalPriceRepository extends AbstractRepository implements PriceRepositoryI
      */
     protected function getEntityClassName()
     {
-        return 'KNone\Grecha\Entity\Price';
+        return Price::class;
     }
 
     /**
