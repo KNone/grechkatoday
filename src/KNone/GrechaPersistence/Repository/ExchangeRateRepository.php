@@ -79,6 +79,6 @@ class ExchangeRateRepository extends AbstractRepository implements ExchangeRateR
      */
     protected function getEntityClassName()
     {
-        return 'KNone\Grecha\Entity\ExchangeRate';
+        return ExchangeRate::class;
     }
 }

@@ -136,7 +136,7 @@ class PriceRepository extends AbstractRepository implements PriceRepositoryInter
      */
     protected function getEntityClassName()
     {
-        return 'KNone\Grecha\Entity\Price';
+        return Price::class;
     }
 
     /**
