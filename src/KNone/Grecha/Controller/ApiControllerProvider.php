@@ -16,10 +16,7 @@ class ApiControllerProvider implements ControllerProviderInterface
         /** @var ControllerCollection $controllers */
         $controllers = $app['controllers_factory'];
 
-        $controllers->post('/price/statistics/{interval}', function ($interval, Request $request, Application $app) {
-            if (!$request->isXmlHttpRequest()) {
-                throw new NotFoundHttpException();
-            }
+        $controllers->get('/price/statistics/{interval}', function ($interval, Request $request, Application $app) {
             /** @var PriceRepositoryInterface $priceRepository */
             $priceRepository = $app['grecha.price.repository'];
             if ($interval === 'week') {
