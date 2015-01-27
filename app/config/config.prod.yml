@@ -12,7 +12,7 @@ config:
         strategy:
             average: 60
             deviation: 0.6
-            retail_rate: 0.52
+            retail_rate: 0.56
     cache:
         dir:
             frontend: web/cache
