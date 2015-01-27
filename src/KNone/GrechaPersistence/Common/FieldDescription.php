@@ -1,6 +1,6 @@
 <?php
 
-namespace KNone\Grecha\Entity\Common;
+namespace KNone\GrechaPersistence\Common;
 
 class FieldDescription
 {

@@ -1,9 +1,10 @@
 <?php
 
-namespace KNone\Grecha\Entity\Common;
+namespace KNone\GrechaPersistence\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
+use KNone\GrechaPersistence\Exception\InvalidArgumentException;
 
 abstract class AbstractRepository
 {
@@ -32,11 +33,15 @@ abstract class AbstractRepository
     }
 
     /**
-     * @param $object
+     * @param $entity
      */
-    public function add($object)
+    public function add($entity)
     {
-        $this->objectsForPersist[] = $object;
+        $entityClass = $this->getEntityClassName();
+        if (!($entity instanceof $entityClass)) {
+            throw new InvalidArgumentException(sprintf('Entity must be instance "%s". Passed "%s"', $entityClass, get_class($entity)));
+        }
+        $this->objectsForPersist[] = $entity;
     }
 
     public function commit()
@@ -93,7 +98,7 @@ abstract class AbstractRepository
     /**
      * Create entity, fields value of which containing value of $result
      *
-     * @param  array  $result [description]
+     * @param  array  $result
      * @return object
      */
     protected function createEntity(array $result)

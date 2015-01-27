@@ -2,96 +2,39 @@
 
 namespace KNone\Grecha;
 
-use Igorw\Silex\ConfigServiceProvider;
-use KNone\Grecha\Entity\Persistence\DbalExchangeRateRepository;
-use KNone\Grecha\Entity\Persistence\DbalPriceRepository;
+use Silex\Application;
+use Knp\Provider\ConsoleServiceProvider;
+use KNone\GrechaCore\AbstractServiceProvider;
 use KNone\Grecha\ExchangeRate\ExchangeRateConverterFactory;
 use KNone\Grecha\ExchangeRate\Importer;
 use KNone\Grecha\ExchangeRate\XmlRateParser;
 use KNone\Grecha\View\TemplateEngine;
-use Knp\Provider\ConsoleServiceProvider;
-use Silex\Application;
-use Silex\Provider\DoctrineServiceProvider;
-use Silex\ServiceProviderInterface;
 use KNone\Grecha\Price\Importer as PriceImporter;
 use KNone\Grecha\Price\Parser as PriceParser;
 use KNone\Grecha\Price\Strategy\AverageCalculationStrategy as PriceStrategy;
 use Websharks\Html_compressor\core as HtmlCompressor;
 
-class GrechaServiceProvider implements ServiceProviderInterface
+class GrechaServiceProvider extends AbstractServiceProvider
 {
     /**
-     * @var string
+     * {@inheritdoc}
      */
-    private $configFileName;
-
-    /**
-     * @param string $configFileName
-     */
-    public function __construct($configFileName)
+    protected function getRegisteredServices()
     {
-        $this->configFileName = $configFileName;
+        return [
+            'console',
+            'templateEngine',
+            'htmlCompressor',
+            'price',
+            'exchangeRate',
+        ];
     }
 
     /**
      * @param Application $app
      */
-    public function boot(Application $app)
+    protected function registerConsole(Application $app)
     {
-    }
-
-    /**
-     * @return string
-     */
-    public function getConfigFileName()
-    {
-        return $this->configFileName;
-    }
-
-    /**
-     * @param Application $app
-     */
-    public function register(Application $app)
-    {
-        $this->registerConfig($app, $this->getConfigFileName());
-
-        $register = [
-                'doctrine',
-                'console',
-                'templateEngine',
-                'htmlCompressor',
-                'price',
-                'exchangeRate',
-            ];
-
-        foreach ($register as $service) {
-            $this->{'register'.$service}($app);
-        }
-    }
-
-    /**
-     * @param Application $app
-     * @param string      $config
-     */
-    protected function registerConfig($app, $config)
-    {
-        $rootDir = realpath(__DIR__.'/../../../');
-        $app->register(new ConfigServiceProvider($config), array('root_dir' => $rootDir));
-    }
-
-    /**
-     * @param Application $app
-     */
-    protected function registerDoctrine($app) {
-        $app->register(new DoctrineServiceProvider(), [
-            'dbs.options' => $app['config']['dbs'],
-        ]);
-    }
-
-    /**
-     * @param Application $app
-     */
-    protected function registerConsole($app) {
         $app->register(
             new ConsoleServiceProvider(),
             [
@@ -105,7 +48,8 @@ class GrechaServiceProvider implements ServiceProviderInterface
     /**
      * @param Application $app
      */
-    protected function registerTemplateEngine($app) {
+    protected function registerTemplateEngine(Application $app)
+    {
         $app['grecha.template.engine'] = $app->share(function () use ($app) {
             return new TemplateEngine($app['grecha.template.compressor'],$app['config']['template']['compress']);
         });
@@ -114,7 +58,8 @@ class GrechaServiceProvider implements ServiceProviderInterface
     /**
      * @param Application $app
      */
-    protected function registerHtmlCompressor($app) {
+    protected function registerHtmlCompressor(Application $app)
+    {
 
         $app['grecha.template.compressor'] = function () use ($app) {
             $config = [
@@ -133,10 +78,6 @@ class GrechaServiceProvider implements ServiceProviderInterface
      */
     protected function registerPrice(Application $app)
     {
-        $app['grecha.price.repository'] = $app->share(function () use ($app) {
-            return new DbalPriceRepository($app['dbs']['mysql']);
-        });
-
         $app['grecha.price.price_strategy'] = function () use ($app) {
             $strategyParams = $app['config']['price']['strategy'];
 
@@ -157,10 +98,6 @@ class GrechaServiceProvider implements ServiceProviderInterface
      */
     protected function registerExchangeRate(Application $app)
     {
-        $app['grecha.exchange_rate.repository'] = $app->share(function () use ($app) {
-            return new DbalExchangeRateRepository($app['dbs']['mysql']);
-        });
-
         $app['grecha.exchange_rate.importer'] = $app->share(function () use ($app) {
             return new Importer(new XmlRateParser(), $app['grecha.exchange_rate.repository']);
         });

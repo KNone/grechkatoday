@@ -28,8 +28,11 @@ class Importer implements ImporterInterface
      * @param ParserInterface $parser
      * @param PriceStrategyInterface $priceStrategy
      */
-    public function __construct($priceRepository, ParserInterface $parser, PriceStrategyInterface $priceStrategy)
-    {
+    public function __construct(
+        PriceRepositoryInterface $priceRepository,
+        ParserInterface $parser,
+        PriceStrategyInterface $priceStrategy
+    ) {
         $this->priceRepository = $priceRepository;
         $this->parser = $parser;
         $this->priceStrategy = $priceStrategy;
