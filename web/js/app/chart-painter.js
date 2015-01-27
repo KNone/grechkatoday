@@ -102,7 +102,7 @@ define(['jquery', 'chartjs'], function ($, Chart) {
         loadPrices: function (interval, successCallback) {
             $.ajax({
                 url: '/api/price/statistics/' + interval,
-                type: 'post'
+                type: 'get'
             }).success(function (json) {
                 successCallback(json);
             });
