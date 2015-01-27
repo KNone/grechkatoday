@@ -9,7 +9,7 @@ class AverageCalculationStrategy implements PriceStrategyInterface
      */
     private $average;
 
-     /**
+    /**
      * @var float
      */
     private $deviation;

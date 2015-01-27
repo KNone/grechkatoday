@@ -24,7 +24,7 @@ class Importer implements ImporterInterface
     private $priceStrategy;
 
     /**
-     * @param object $priceRepository
+     * @param PriceRepositoryInterface $priceRepository
      * @param ParserInterface $parser
      * @param PriceStrategyInterface $priceStrategy
      */
@@ -77,23 +77,13 @@ class Importer implements ImporterInterface
     {
         if ($value) {
             $price = new Price($value, $dateTime);
-            $this->getPriceRepository()->add($price);
-            $this->getPriceRepository()->commit();
         } else {
-            $price = $this->getPriceRepository()->findPriceByDateTime($dateTime->sub(new \DateInterval('P1D')));
-            if ($price) {
-                $value = $price->getValue();
-                $random = (rand(0, 1) + rand(1, 10) / 10);
-                if (rand(0, 1) === 1) {
-                    $value = $value - $random;
-                } else {
-                    $value = $value + $random;
-                }
-
-                $this->getPriceRepository()->add(new Price($value, $dateTime));
-                $this->getPriceRepository()->commit();
-            }
+            $actualPrice = $this->getPriceRepository()->findActualPrice();
+            $price = new Price($actualPrice->getValue(), $dateTime);
         }
+
+        $this->getPriceRepository()->add($price);
+        $this->getPriceRepository()->commit();
     }
 
     /**
