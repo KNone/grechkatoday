@@ -5,3 +5,4 @@ composer.phar
 bin
 cache
 web/cache
+web/images/share/snapshot.png

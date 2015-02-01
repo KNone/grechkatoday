@@ -10,7 +10,7 @@ define(['jquery', 'app/chart-painter', 'yashare'], function ($, chartPainter) {
         },
         link: 'http://grechkatoday.ru/',
         title: 'Гречка Тудэй. Следи за курсом гречки!',
-        image: 'http://grechkatoday.ru/images/share/grechka.jpg',
+        image: 'http://grechkatoday.ru/images/share/snapshot.png',
         serviceSpecific: {
             vkontakte: {
                 title: socialDescription
