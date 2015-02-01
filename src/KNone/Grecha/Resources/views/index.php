@@ -7,7 +7,7 @@
 <html lang="ru" id="nojs" xml:lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Гречка Тудэй | Гречка сегодня — <?=$pricePresenter->getRubles()?> руб. (<?=date('d.m.Y')?></title>
+    <title>Гречка Тудэй | Гречка сегодня — <?=$pricePresenter->getRubles()?> руб. (<?=date('d.m.Y')?>)</title>
     <meta name="keywords"
           content="гречка, греча, курс гречи, килограмм гречки, гречневая крупа, стоимость гречки, grechkatoday, grechka, гручка тудэй, гречка сегодня, доллар, евро"/>
     <meta name="description"
