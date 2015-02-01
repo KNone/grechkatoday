@@ -94,7 +94,8 @@
                 </div>
             </div>
         </div>
-        <div class="ads" style="text-align: center;padding-top:10px;">
+        <?php
+        /*<div class="ads" style="text-align: center;padding-top:10px;">
             <ins class="adsbygoogle"
                  style="display:inline-block;width:320px;height:50px"
                  data-ad-client="ca-pub-1797214625818644"
@@ -102,7 +103,8 @@
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-        </div>
+        </div>*/
+        ?>
     </div>
 </div>
 <div class="b-footer">
@@ -118,7 +120,7 @@
             <div class="b-stripe__in">
                 <div class="b-box b-box_content_mailto">
                     <a href="mailto:info@grechkatoday.ru"
-                       title="По всем вопросам пишите письма">info@grechkatoday.ru</a>
+                       title="По всем вопросам пишите письма">© grechkatoday.ru</a>
                 </div>
             </div>
         </div>

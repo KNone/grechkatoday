@@ -4,7 +4,7 @@ define(['jquery', 'app/chart-painter', 'yashare'], function ($, chartPainter) {
     new Ya.share({
         element: 'social',
         elementStyle: {
-            'type': 'small',
+            'type': 'none',
             'quickServices': ['vkontakte', 'facebook', 'twitter', 'odnoklassniki', 'moimir', 'gplus']
         },
         link: 'http://grechkatoday.ru/',
@@ -17,7 +17,6 @@ define(['jquery', 'app/chart-painter', 'yashare'], function ($, chartPainter) {
             twitter: {
                 title: 'Гречка Тудэй. Следи за курсом гречки! #grechkatoday #grechka #usd #eur'
             }
-        },
-        theme: 'counter'
+        }
     });
 });
