@@ -1,6 +1,7 @@
 define(['jquery', 'app/chart-painter', 'yashare'], function ($, chartPainter) {
     'use strict';
     chartPainter.init($('.charts'));
+    var socialDescription = $('.c-social-description').text() + ' #grechkatoday #grechka #usd #eur';
     new Ya.share({
         element: 'social',
         elementStyle: {
@@ -12,10 +13,10 @@ define(['jquery', 'app/chart-painter', 'yashare'], function ($, chartPainter) {
         image: 'http://grechkatoday.ru/images/share/grechka.jpg',
         serviceSpecific: {
             vkontakte: {
-                title: 'Гречка Тудэй. Следи за курсом гречки! #grechkatoday #grechka #usd #eur'
+                title: socialDescription
             },
             twitter: {
-                title: 'Гречка Тудэй. Следи за курсом гречки! #grechkatoday #grechka #usd #eur'
+                title: socialDescription
             }
         }
     });

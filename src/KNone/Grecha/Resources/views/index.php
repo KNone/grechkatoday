@@ -7,7 +7,7 @@
 <html lang="ru" id="nojs" xml:lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Гречка Тудэй | Сколько стоит гречка сегодня?</title>
+    <title>Гречка Тудэй | Гречка сегодня — <?=$pricePresenter->getRubles()?> руб. (<?=date('d.m.Y')?></title>
     <meta name="keywords"
           content="гречка, греча, курс гречи, килограмм гречки, гречневая крупа, стоимость гречки, grechkatoday, grechka, гручка тудэй, гречка сегодня, доллар, евро"/>
     <meta name="description"
@@ -48,6 +48,7 @@
                                 <span class="b-cost-buckwheat__value-text">
                                     <span
                                         class="<?= $pricePresenter->getDifferenceInRubles() <= 0 ? 'cost_down' : 'cost_up' ?>"><?= $pricePresenter->getRubles() ?></span>
+                                    <span style="display:none;" class="c-social-description">Гречка сегодня — <?=$pricePresenter->getRubles()?> руб. (<?=date('d.m.Y')?>)</span>
                                     <span class="b-remark b-remark_price_currency_ru">
                                         <span class="b-remark__icon"></span>
                                         <span class="b-remark__dropdown">
