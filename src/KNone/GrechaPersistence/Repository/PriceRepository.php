@@ -4,7 +4,6 @@ namespace KNone\GrechaPersistence\Repository;
 
 use Doctrine\DBAL\Statement;
 use Doctrine\DBAL\Types\Type;
-use KNone\GrechaPersistence\Repository\AbstractRepository;
 use KNone\GrechaPersistence\Common\FieldDescription;
 use KNone\Grecha\Entity\Price;
 use KNone\Grecha\Entity\PriceRepositoryInterface;
@@ -83,7 +82,7 @@ class PriceRepository extends AbstractRepository implements PriceRepositoryInter
      */
     public function findPricesForWeek()
     {
-        return $this->findPricesForInterval(new \DateInterval('P6D'));
+        return $this->findPricesForInterval(new \DateInterval('P7D'));
     }
 
     /**
@@ -103,7 +102,7 @@ class PriceRepository extends AbstractRepository implements PriceRepositoryInter
         $today = new \DateTimeImmutable('today');
         $forDate = $today->sub($interval);
 
-        $sql = sprintf('SELECT * FROM %s p WHERE p.date_time >= ? AND p.date_time <= ? ORDER BY p.date_time ASC ', $this->getTableName());
+        $sql = sprintf('SELECT * FROM %s p WHERE p.date_time > ? AND p.date_time <= ? ORDER BY p.date_time ASC ', $this->getTableName());
         /** @var Statement $statement */
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(1, $forDate, Type::DATETIME);
