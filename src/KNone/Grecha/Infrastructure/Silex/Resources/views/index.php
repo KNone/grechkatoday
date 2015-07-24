@@ -18,8 +18,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <![endif]-->
     <script type="text/javascript">document.documentElement.id = "js";</script>
-    <link rel="shortcut icon" href="../../../../../../web/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" media="screen" href="../../../../../../web/css/templates-styles.css"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" media="screen" href="css/templates-styles.css"/>
 </head>
 <body>
 <div class="b-page">
@@ -30,7 +30,7 @@
                     <div class="b-logo b-logo_content_main">
                         <a class="b-logo__thumbnail" title="GRECHKA TODAY" href="/">
                             <ins class="b-ico b-ico_viewtype_logo-decor"></ins>
-                            <img src="../../../../../../web/images/b-logo_type_main--b-logo__image.png" width="344" height="120"
+                            <img src="images/b-logo_type_main--b-logo__image.png" width="344" height="120"
                                  align="GRECHKA TODAY" title="GRECHKA TODAY">
                         </a>
                     </div>
@@ -128,7 +128,7 @@
     </div>
 </div>
 
-<script <?= ($debug ? 'data-main="js/app"' : 'data-main="js/scripts"') ?> src="../../../../../../web/js/lib/require.js"></script>
+<script <?= ($debug ? 'data-main="js/app"' : 'data-main="js/scripts"') ?> src="js/lib/require.js"></script>
 <script>
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
