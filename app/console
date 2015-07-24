@@ -3,10 +3,10 @@
 
 $app = require_once __DIR__ . '/bootstrap.php';
 
-use KNone\Grecha\Command\CreatePreview;
-use KNone\Grecha\Command\ExchangeRateImport;
-use KNone\Grecha\Command\PriceImport;
-use KNone\Grecha\Command\CacheClear;
+use KNone\Grecha\Infrastructure\Silex\Command\CreatePreview;
+use KNone\Grecha\Infrastructure\Silex\Command\ExchangeRateImport;
+use KNone\Grecha\Infrastructure\Silex\Command\PriceImport;
+use KNone\Grecha\Infrastructure\Silex\Command\CacheClear;
 
 $application = $app['console'];
 $application->add(new PriceImport());
