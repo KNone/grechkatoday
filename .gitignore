@@ -6,3 +6,4 @@ bin
 cache
 web/cache
 web/images/share/snapshot.png
+docker-compose.yml
