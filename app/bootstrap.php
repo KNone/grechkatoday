@@ -20,4 +20,7 @@ $app->register(new PersistenceServiceProvider());
 $app->mount('/', new MainControllerProvider());
 $app->mount('/api', new ApiControllerProvider());
 
+//todo: read db settings from $_ENV and contain to config
+//$app['config']
+
 return $app;
