@@ -22,6 +22,6 @@ RUN mkdir -p /etc/nginx/sites-available/
 ADD build/nginx/grechkatoday.conf /etc/nginx/sites-available/
 ADD build/nginx/nginx.conf /etc/nginx/
 RUN mkdir -p /etc/nginx/sites-enabled/
-RUN ln -s /etc/nginx/sites-available/knone.conf /etc/nginx/sites-enabled/grechkatoday.conf
+RUN ln -s /etc/nginx/sites-available/grechkatoday.conf /etc/nginx/sites-enabled/grechkatoday.conf
 
 CMD service php5-fpm restart && service nginx stop && nginx
